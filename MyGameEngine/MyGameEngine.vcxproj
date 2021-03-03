@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="Bitmask.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WorkingDirectory.cpp" />
@@ -159,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="Bitmask.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="Input.hpp" />
     <ClInclude Include="Window.hpp" />
     <ClInclude Include="WorkingDirectory.hpp" />
   </ItemGroup>
