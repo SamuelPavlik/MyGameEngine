@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -150,13 +150,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bitmask.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="WorkingDirectory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bitmask.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Window.hpp" />
+    <ClInclude Include="WorkingDirectory.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\attack_0.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
