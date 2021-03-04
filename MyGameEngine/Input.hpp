@@ -17,16 +17,16 @@ public:
     };
     Input();
     void Update();
-    void AddMapping(std::string KeyName, sf::Keyboard::Key keyInput);
-    bool IsKeyPressed(Key keycode); // Returns true if the key is pressed.
-    bool IsKeyDown(Key keycode); // Returns true if the key was just pressed.
-    bool IsKeyUp(Key keycode); // Returns true if the key was just released.
+    void AddMapping(std::string keyName, sf::Keyboard::Key keyInput);
+    bool IsKeyPressed(std::string keyName); // Returns true if the key is pressed.
+    bool IsKeyDown(std::string keyName); // Returns true if the key was just pressed.
+    bool IsKeyUp(std::string keyName); // Returns true if the key was just released.
 
 private:
     Bitmask thisFrameKeys;
     Bitmask lastFrameKeys;
-    std::vector<std::string> keyToPosMapping;
-    std::unordered_map<size_t, std::vector<sf::Keyboard::Key>> posToKeyboardMapping;
+    std::unordered_map<std::string, size_t> keyToPosMapping;
+    std::vector<std::vector<sf::Keyboard::Key>> posToKeyboardMapping;
 };
 
 #endif /* Input_hpp */

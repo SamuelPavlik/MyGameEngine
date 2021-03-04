@@ -14,16 +14,16 @@ public:
     uint32_t GetMask() const;
 
     // Returns true if bit at pos = 1, else false.
-    bool GetBit(int pos) const;
+    bool GetBit(size_t pos) const;
 
     // Sets bit at specified pos to 1 or 0 (true or false).
-    void SetBit(int pos, bool on);
+    void SetBit(size_t pos, bool on);
 
     // Sets bit at pos to 1.
-    void SetBit(int pos);
+    void SetBit(size_t pos);
 
     // Sets bit at pos to 0.
-    void ClearBit(int pos);
+    void ClearBit(size_t pos);
 
     // Sets all bits to 0.
     void Clear();

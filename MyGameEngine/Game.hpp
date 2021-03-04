@@ -3,6 +3,7 @@
 
 #include "Window.hpp"
 #include "WorkingDirectory.hpp"
+#include "Input.hpp"
 
 class Game {
 public:
@@ -12,6 +13,7 @@ public:
     void Draw();
     bool IsRunning() const;
     void CalculateDeltaTime();
+    void CaptureInput();
 
 private:
     Window window;
@@ -24,6 +26,10 @@ private:
     //Time related
     sf::Clock clock;
     float deltaTime;
+
+    //
+    Input input;
+
 };
 
 
