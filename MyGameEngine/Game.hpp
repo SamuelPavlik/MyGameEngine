@@ -4,6 +4,7 @@
 #include "Window.hpp"
 #include "WorkingDirectory.hpp"
 #include "Input.hpp"
+#include "SceneStateMachine.hpp"
 
 class Game {
 public:
@@ -27,9 +28,11 @@ private:
     sf::Clock clock;
     float deltaTime;
 
-    //
+    //Input managment
     Input input;
 
+    //Scene managment
+    SceneStateMachine sceneStateMachine;
 };
 
 

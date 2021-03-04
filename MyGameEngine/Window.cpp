@@ -30,3 +30,7 @@ void Window::EndDraw() {
 bool Window::IsOpen() const {
     return window.isOpen();
 }
+
+sf::Vector2u Window::GetCentre() const {
+    return window.getSize() / 2u;
+}
