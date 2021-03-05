@@ -1,7 +1,5 @@
 #include "Object.hpp"
 
-
-
 Object::Object() {
     transform = AddComponent<C_Transform>();
 }

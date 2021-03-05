@@ -2,6 +2,7 @@
 #define SceneGame_hpp
 
 #include "Scene.hpp"
+#include "ResourceAllocator.hpp"
 
 class Object;
 class Input;
@@ -9,7 +10,7 @@ class WorkingDirectory;
 
 class SceneGame : public Scene {
 public:
-    SceneGame(WorkingDirectory& workingDir, Input& input);
+    SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocator<sf::Texture> textureAllocator);
 
     void OnCreate() override;
     void OnDestroy() override;
@@ -23,6 +24,7 @@ private:
 
     WorkingDirectory& workingDir;
     Input& input;
+    ResourceAllocator<sf::Texture>& textureAllocator;
 };
 
 #endif /* SceneGame_hpp */

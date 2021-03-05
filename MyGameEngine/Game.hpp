@@ -5,6 +5,7 @@
 #include "WorkingDirectory.hpp"
 #include "Input.hpp"
 #include "SceneStateMachine.hpp"
+#include "ResourceAllocator.hpp"
 
 class Game {
 public:
@@ -19,6 +20,7 @@ public:
 private:
     Window window;
     WorkingDirectory workingDir;
+    ResourceAllocator<sf::Texture> textureAllocator;
 
     //Game textures
     sf::Texture vikingTexture;
