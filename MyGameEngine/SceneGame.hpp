@@ -2,8 +2,10 @@
 #define SceneGame_hpp
 
 #include "Scene.hpp"
-#include "Input.hpp"
-#include "WorkingDirectory.hpp"
+
+class Object;
+class Input;
+class WorkingDirectory;
 
 class SceneGame : public Scene {
 public:
@@ -14,10 +16,10 @@ public:
 
     void Update(float deltaTime) override;
     void Draw(Window& window) override;
+    void LateUpdate(float deltaTime) override;
 
 private:
-    sf::Texture vikingTexture;
-    sf::Sprite vikingSprite;
+    std::shared_ptr<Object> player;
 
     WorkingDirectory& workingDir;
     Input& input;
