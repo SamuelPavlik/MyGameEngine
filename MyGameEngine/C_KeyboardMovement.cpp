@@ -2,8 +2,8 @@
 #include "Object.hpp"
 #include "Input.hpp"
 
-C_KeyboardMovement::C_KeyboardMovement(Object* owner)
-    : Component(owner), moveSpeed(100) {
+C_KeyboardMovement::C_KeyboardMovement(Object* owner, Input* input)
+    : Component(owner), moveSpeed(100), input(input) {
 }
 
 void C_KeyboardMovement::SetInput(Input* input) {

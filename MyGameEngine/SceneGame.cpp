@@ -14,8 +14,7 @@ void SceneGame::OnCreate() {
 
     auto sprite = player->AddComponent<C_Sprite>();
     sprite->Load(workingDir.Get() + "attack_0.png");
-    auto keyInput = player->AddComponent<C_KeyboardMovement>();
-    keyInput->SetInput(&input);
+    auto keyInput = player->AddComponent<C_KeyboardMovement>(&input);
 }
 
 void SceneGame::OnDestroy() {}
