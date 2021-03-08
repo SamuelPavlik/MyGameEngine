@@ -1,6 +1,7 @@
 #include "SceneSplashScreen.hpp"
 #include "SceneStateMachine.hpp"
 #include "WorkingDirectory.hpp"
+#include "ResourceAllocator.hpp"
 
 SceneSplashScreen::SceneSplashScreen(WorkingDirectory& workingDir,
     SceneStateMachine& sceneStateMachine,

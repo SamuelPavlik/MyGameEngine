@@ -6,6 +6,7 @@
 #include "C_KeyboardMovement.hpp"
 #include "C_Animation.hpp"
 #include "Animation.hpp"
+#include "ResourceAllocator.hpp"
 
 SceneGame::SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocator<sf::Texture>& textureAllocator) :
     workingDir(workingDir),

@@ -1,6 +1,7 @@
 #include "C_Sprite.hpp"
 #include "Object.hpp"
 #include "C_Transform.hpp"
+#include "ResourceAllocator.hpp"
 
 C_Sprite::C_Sprite(Object* owner, ResourceAllocator<sf::Texture>* allocator) :
     Component(owner),

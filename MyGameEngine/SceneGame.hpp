@@ -2,12 +2,13 @@
 #define SceneGame_hpp
 
 #include "Scene.hpp"
-#include "ResourceAllocator.hpp"
 #include "ObjectCollection.hpp"
 
 class Object;
 class Input;
 class WorkingDirectory;
+template<typename T>
+class ResourceAllocator;
 
 class SceneGame : public Scene {
 public:

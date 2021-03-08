@@ -2,7 +2,9 @@
 #define C_Sprite_hpp
 
 #include "Component.hpp"
-#include "ResourceAllocator.hpp"
+
+template<typename T>
+class ResourceAllocator;
 
 class C_Sprite : public Component {
 public:

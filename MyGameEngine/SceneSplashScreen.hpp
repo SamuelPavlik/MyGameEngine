@@ -3,11 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 #include "Scene.hpp"
-#include "ResourceAllocator.hpp"
 
 class WorkingDirectory;
 class SceneStateMachine;
 class Window;
+template<typename T>
+class ResourceAllocator;
 
 class SceneSplashScreen : public Scene {
 public:
