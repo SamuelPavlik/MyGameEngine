@@ -6,6 +6,8 @@
 
 class C_Sprite : public Component {
 public:
+    C_Sprite(Object* owner, ResourceAllocator<sf::Texture>* allocator);
+
     C_Sprite(Object* owner, ResourceAllocator<sf::Texture>* allocator, const std::string& filePath);
 
     void Load(const std::string& filePath);
@@ -16,9 +18,14 @@ public:
 
     void LateUpdate(float DeltaTime) override;
 
+    void SetTextureRect(int x, int y, int width, int height);
+
+    void SetTextureRect(const sf::IntRect& rect);
+
 private:
     ResourceAllocator<sf::Texture>* allocator;
     sf::Sprite sprite;
+    int currentTextureID;
 };
 
 #endif /* C_Sprite_hpp */

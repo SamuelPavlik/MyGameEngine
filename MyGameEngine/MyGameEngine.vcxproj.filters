@@ -66,6 +66,12 @@
     <ClCompile Include="ObjectCollection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -116,12 +122,21 @@
     <ClInclude Include="ObjectCollection.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Animation.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\attack_0.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="..\..\..\..\Pictures\TanksCover.PNG">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="viking_sheet.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

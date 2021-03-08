@@ -150,8 +150,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Bitmask.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="C_Animation.cpp" />
     <ClCompile Include="C_KeyboardMovement.cpp" />
     <ClCompile Include="C_Sprite.cpp" />
     <ClCompile Include="C_Transform.cpp" />
@@ -169,8 +171,10 @@
     <ClCompile Include="WorkingDirectory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Bitmask.hpp" />
     <ClInclude Include="Component.hpp" />
+    <ClInclude Include="C_Animation.hpp" />
     <ClInclude Include="C_KeyboardMovement.hpp" />
     <ClInclude Include="C_Sprite.hpp" />
     <ClInclude Include="C_Transform.hpp" />
@@ -189,6 +193,7 @@
   <ItemGroup>
     <Image Include="..\..\..\..\Pictures\TanksCover.PNG" />
     <Image Include="..\attack_0.png" />
+    <Image Include="viking_sheet.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
