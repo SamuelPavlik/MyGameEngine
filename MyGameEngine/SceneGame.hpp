@@ -3,6 +3,7 @@
 
 #include "Scene.hpp"
 #include "ResourceAllocator.hpp"
+#include "ObjectCollection.hpp"
 
 class Object;
 class Input;
@@ -25,6 +26,7 @@ private:
     WorkingDirectory& workingDir;
     Input& input;
     ResourceAllocator<sf::Texture>& textureAllocator;
+    ObjectCollection objects;
 };
 
 #endif /* SceneGame_hpp */

@@ -19,6 +19,8 @@ public:
     void Update(float deltaTime);
     void LateUpdate(float deltaTime);
     void Draw(Window& window);
+    bool IsQueuedForRemoval();
+    void QueueForRemoval();
 
     template <typename T, typename... Args> std::shared_ptr<T> AddComponent(Args... args) {
         static_assert(std::is_base_of<Component, T>::value,
@@ -53,6 +55,7 @@ public:
 
 public:
     std::shared_ptr<C_Transform> transform;
+    bool queuedForRemoval;
 
 private:
     std::vector<std::shared_ptr<Component>> components;
