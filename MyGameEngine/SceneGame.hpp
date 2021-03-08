@@ -10,7 +10,7 @@ class WorkingDirectory;
 
 class SceneGame : public Scene {
 public:
-    SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocator<sf::Texture> textureAllocator);
+    SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocator<sf::Texture>& textureAllocator);
 
     void OnCreate() override;
     void OnDestroy() override;

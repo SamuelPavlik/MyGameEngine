@@ -40,7 +40,7 @@ public:
 
     std::shared_ptr<T> Get(int id) {
         if (resources.find(id) != resources.cend())
-            return resources[id];
+            return resources[id].second;
         
         return nullptr;
     }

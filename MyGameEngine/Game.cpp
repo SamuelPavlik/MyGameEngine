@@ -18,11 +18,11 @@ Game::Game() : window("Game Window") {
 
     //Initialize scenes
     std::shared_ptr<SceneSplashScreen> splashScreen =
-        std::make_shared<SceneSplashScreen>(workingDir, sceneStateMachine, window);
+        std::make_shared<SceneSplashScreen>(workingDir, sceneStateMachine, window, textureAllocator);
 
     unsigned int splashScreenID = sceneStateMachine.Add(splashScreen);
     unsigned int gameSceneID = sceneStateMachine.Add(
-        std::make_shared<SceneGame>(workingDir, input));
+        std::make_shared<SceneGame>(workingDir, input, textureAllocator));
 
     splashScreen->SetSwitchToScene(gameSceneID);
     sceneStateMachine.SwitchTo(splashScreenID);

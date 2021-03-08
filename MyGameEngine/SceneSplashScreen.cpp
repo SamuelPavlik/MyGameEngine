@@ -1,31 +1,38 @@
 #include "SceneSplashScreen.hpp"
+#include "SceneStateMachine.hpp"
+#include "WorkingDirectory.hpp"
 
 SceneSplashScreen::SceneSplashScreen(WorkingDirectory& workingDir,
     SceneStateMachine& sceneStateMachine,
-    Window& window) : 
+    Window& window, ResourceAllocator<sf::Texture>& textureAllocator) :
     sceneStateMachine(sceneStateMachine), 
     workingDir(workingDir),
     window(window), 
+    textureAllocator(textureAllocator),
     switchToState(0), 
     currentSeconds(0.f),
     showForSeconds(3.f) {}
 
 void SceneSplashScreen::OnCreate() {
-    splashTexture.loadFromFile(workingDir.Get()
+    int textureID = textureAllocator.Add(workingDir.Get()
         + "TanksCover.PNG");
-    splashSprite.setTexture(splashTexture);
 
-    sf::FloatRect spriteSize = splashSprite.getLocalBounds();
+    if (textureID >= 0) {
+        std::shared_ptr<sf::Texture> texture = textureAllocator.Get(textureID);
+        splashSprite.setTexture(*texture);
 
-    // Set the origin of the sprite to the centre of the image:
-    splashSprite.setOrigin(spriteSize.width * 0.5f,
-        spriteSize.height * 0.5f);
-    splashSprite.setScale(0.5f, 0.5f);
+        sf::FloatRect spriteSize = splashSprite.getLocalBounds();
 
-    sf::Vector2u windowCentre = window.GetCentre();
+        // Set the origin of the sprite to the centre of the image:
+        splashSprite.setOrigin(spriteSize.width * 0.5f,
+            spriteSize.height * 0.5f);
+        splashSprite.setScale(0.5f, 0.5f);
 
-    // Positions sprite in centre of screen:
-    splashSprite.setPosition(windowCentre.x, windowCentre.y);
+        sf::Vector2u windowCentre = window.GetCentre();
+
+        // Positions sprite in centre of screen:
+        splashSprite.setPosition(windowCentre.x, windowCentre.y);
+    }
 }
 
 void SceneSplashScreen::OnActivate() {

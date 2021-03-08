@@ -2,18 +2,21 @@
 #define SceneSplashScreen_hpp
 
 #include <SFML/Graphics.hpp>
+#include "Scene.hpp"
+#include "ResourceAllocator.hpp"
 
-#include "SceneStateMachine.hpp"
-#include "WorkingDirectory.hpp"
+class WorkingDirectory;
+class SceneStateMachine;
+class Window;
 
 class SceneSplashScreen : public Scene {
 public:
     SceneSplashScreen(WorkingDirectory& workingDir,
-        SceneStateMachine& sceneStateMachine, Window& window);
+        SceneStateMachine& sceneStateMachine, Window& window, 
+        ResourceAllocator<sf::Texture>& textureAllocator);
 
     void OnCreate() override;
     void OnDestroy() override;
-
     void OnActivate() override;
 
     void SetSwitchToScene(unsigned int id);
@@ -22,12 +25,12 @@ public:
     void Draw(Window& window) override;
 
 private:
-    sf::Texture splashTexture;
     sf::Sprite splashSprite;
 
     WorkingDirectory& workingDir;
     SceneStateMachine& sceneStateMachine;
     Window& window;
+    ResourceAllocator<sf::Texture>& textureAllocator;
 
     float showForSeconds;
     float currentSeconds;

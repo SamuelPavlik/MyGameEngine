@@ -5,7 +5,7 @@
 #include "C_Sprite.hpp"
 #include "C_KeyboardMovement.hpp"
 
-SceneGame::SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocator<sf::Texture> textureAllocator) :
+SceneGame::SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocator<sf::Texture>& textureAllocator) :
     workingDir(workingDir),
     input{input},
     textureAllocator{textureAllocator} {}
@@ -13,8 +13,7 @@ SceneGame::SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocat
 void SceneGame::OnCreate() {
     player = std::make_shared<Object>();
 
-    auto sprite = player->AddComponent<C_Sprite>(textureAllocator, workingDir.Get() + "attack_0.png");
-    //sprite->Load(workingDir.Get() + "attack_0.png");
+    auto sprite = player->AddComponent<C_Sprite>(&textureAllocator, workingDir.Get() + "attack_0.png");
     auto keyInput = player->AddComponent<C_KeyboardMovement>(&input);
 }
 

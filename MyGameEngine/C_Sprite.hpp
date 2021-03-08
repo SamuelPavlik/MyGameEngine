@@ -10,6 +10,8 @@ public:
 
     void Load(const std::string& filePath);
 
+    void Load(int id);
+
     void Draw(Window& window) override;
 
     void LateUpdate(float DeltaTime) override;
@@ -17,7 +19,6 @@ public:
 private:
     ResourceAllocator<sf::Texture>* allocator;
     sf::Sprite sprite;
-    //sf::Texture texture;
 };
 
 #endif /* C_Sprite_hpp */
