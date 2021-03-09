@@ -11,7 +11,8 @@
 SceneGame::SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocator<sf::Texture>& textureAllocator) :
     workingDir(workingDir),
     input{input},
-    textureAllocator{textureAllocator} {}
+    textureAllocator{textureAllocator},
+    mapParser{textureAllocator} {}
 
 void SceneGame::OnCreate() {
     player = std::make_shared<Object>();
@@ -57,6 +58,12 @@ void SceneGame::OnCreate() {
 
     //adding player to collection
     objects.Add(player);
+
+    sf::Vector2i mapOffset(-100, 128);
+    std::vector<std::shared_ptr<Object>> levelTiles = 
+        mapParser.Parse(workingDir.Get() + "Test Map 1.tmx", mapOffset);
+
+    objects.Add(levelTiles);
 }
 
 void SceneGame::OnDestroy() {}

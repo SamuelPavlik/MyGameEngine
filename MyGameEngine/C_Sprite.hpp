@@ -24,6 +24,8 @@ public:
 
     void SetTextureRect(const sf::IntRect& rect);
 
+    void SetScale(float x, float y);
+
 private:
     ResourceAllocator<sf::Texture>* allocator;
     sf::Sprite sprite;

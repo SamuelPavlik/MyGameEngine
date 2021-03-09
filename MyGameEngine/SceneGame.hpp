@@ -3,6 +3,7 @@
 
 #include "Scene.hpp"
 #include "ObjectCollection.hpp"
+#include "TileMapParser.hpp"
 
 class Object;
 class Input;
@@ -28,6 +29,7 @@ private:
     Input& input;
     ResourceAllocator<sf::Texture>& textureAllocator;
     ObjectCollection objects;
+    TileMapParser mapParser;
 };
 
 #endif /* SceneGame_hpp */

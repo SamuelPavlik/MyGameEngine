@@ -167,10 +167,17 @@
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="SceneSplashScreen.cpp" />
     <ClCompile Include="SceneStateMachine.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileMapParser.cpp" />
+    <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WorkingDirectory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Downloads\rapidxml-1.13\rapidxml.hpp" />
+    <ClInclude Include="..\..\..\..\Downloads\rapidxml-1.13\rapidxml_iterators.hpp" />
+    <ClInclude Include="..\..\..\..\Downloads\rapidxml-1.13\rapidxml_print.hpp" />
+    <ClInclude Include="..\..\..\..\Downloads\rapidxml-1.13\rapidxml_utils.hpp" />
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Bitmask.hpp" />
     <ClInclude Include="Component.hpp" />
@@ -187,13 +194,20 @@
     <ClInclude Include="SceneGame.hpp" />
     <ClInclude Include="SceneSplashScreen.hpp" />
     <ClInclude Include="SceneStateMachine.hpp" />
+    <ClInclude Include="Tile.hpp" />
+    <ClInclude Include="TileMapParser.hpp" />
+    <ClInclude Include="Utilities.hpp" />
     <ClInclude Include="Window.hpp" />
     <ClInclude Include="WorkingDirectory.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\Jungle Tiles.png" />
     <Image Include="..\..\..\..\Pictures\TanksCover.PNG" />
     <Image Include="..\attack_0.png" />
     <Image Include="viking_sheet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Downloads\Test Map 1.tmx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
