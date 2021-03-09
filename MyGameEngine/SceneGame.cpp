@@ -35,6 +35,24 @@ void SceneGame::OnCreate() {
     idleAnimation->AddFrame(vikingTextureID, 200, 145,
         frameWidth, frameHeight, idleAnimFrameSeconds);
 
+    //walking anim definition
+    std::shared_ptr<Animation> walkAnimation =
+        std::make_shared<Animation>(FacingDirection::Right);
+    const float walkAnimFrameSeconds = 0.15f;
+
+    walkAnimation->AddFrame(vikingTextureID, 600, 290,
+        frameWidth, frameHeight, walkAnimFrameSeconds);
+    walkAnimation->AddFrame(vikingTextureID, 800, 290,
+        frameWidth, frameHeight, walkAnimFrameSeconds);
+    walkAnimation->AddFrame(vikingTextureID, 0, 435,
+        frameWidth, frameHeight, walkAnimFrameSeconds);
+    walkAnimation->AddFrame(vikingTextureID, 200, 435,
+        frameWidth, frameHeight, walkAnimFrameSeconds);
+    walkAnimation->AddFrame(vikingTextureID, 400, 435,
+        frameWidth, frameHeight, walkAnimFrameSeconds);
+
+    //add animations to our Viking
+    animation->AddAnimation(AnimationState::Walk, walkAnimation);
     animation->AddAnimation(AnimationState::Idle, idleAnimation);
 
     //adding player to collection

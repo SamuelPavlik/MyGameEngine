@@ -5,7 +5,7 @@
 #include "Animation.hpp"
 
 C_KeyboardMovement::C_KeyboardMovement(Object* owner, Input* input)
-    : Component(owner), moveSpeed(100), input(input) {
+    : Component(owner), moveSpeed(200), input(input) {
 }
 
 void C_KeyboardMovement::Awake() {
@@ -41,6 +41,13 @@ void C_KeyboardMovement::Update(float deltaTime) {
     }
     else if (input->IsKeyPressed("Down")) {
         yMove = moveSpeed;
+    }
+
+    if (xMove == 0 && yMove == 0) {
+        animation->SetAnimationState(AnimationState::Idle);
+    }
+    else {
+        animation->SetAnimationState(AnimationState::Walk);
     }
 
     float xFrameMove = xMove * deltaTime;
