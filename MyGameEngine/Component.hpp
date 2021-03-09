@@ -2,7 +2,6 @@
 #define Component_hpp
 
 #include "Window.hpp"
-//#include "Object.hpp"
 
 class Object;
 

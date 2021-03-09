@@ -23,7 +23,7 @@ void SceneGame::OnCreate() {
     int vikingTextureID = textureAllocator.Add(workingDir.Get() + "viking_sheet.png");
     const int frameWidth = 165;
     const int frameHeight = 145;
-    std::shared_ptr<Animation> idleAnimation = std::make_shared<Animation>();
+    std::shared_ptr<Animation> idleAnimation = std::make_shared<Animation>(FacingDirection::Right);
     const float idleAnimFrameSeconds = 0.2f;
 
     idleAnimation->AddFrame(vikingTextureID, 600, 0,

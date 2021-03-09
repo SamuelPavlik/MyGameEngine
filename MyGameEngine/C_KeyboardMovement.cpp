@@ -1,9 +1,15 @@
 #include "C_KeyboardMovement.hpp"
 #include "Object.hpp"
 #include "Input.hpp"
+#include "C_Animation.hpp"
+#include "Animation.hpp"
 
 C_KeyboardMovement::C_KeyboardMovement(Object* owner, Input* input)
     : Component(owner), moveSpeed(100), input(input) {
+}
+
+void C_KeyboardMovement::Awake() {
+    animation = owner->GetComponent<C_Animation>();
 }
 
 void C_KeyboardMovement::SetInput(Input* input) {
@@ -22,9 +28,11 @@ void C_KeyboardMovement::Update(float deltaTime) {
     int xMove = 0;
     if (input->IsKeyPressed("Left")) {
         xMove = -moveSpeed;
+        animation->SetAnimationDirection(FacingDirection::Left);
     }
     else if (input->IsKeyPressed("Right")) {
         xMove = moveSpeed;
+        animation->SetAnimationDirection(FacingDirection::Right);
     }
 
     int yMove = 0;

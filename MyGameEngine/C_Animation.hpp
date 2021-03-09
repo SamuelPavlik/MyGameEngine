@@ -2,8 +2,8 @@
 #define C_Animation_hpp
 
 #include "Component.hpp"
+#include "Animation.hpp"
 
-class Animation;
 class C_Sprite;
 
 enum class AnimationState {
@@ -26,6 +26,8 @@ public:
     void SetAnimationState(AnimationState state);
 
     const AnimationState& GetAnimationState() const;
+
+    void SetAnimationDirection(FacingDirection dir);
 
 private:
     std::shared_ptr<C_Sprite> sprite;

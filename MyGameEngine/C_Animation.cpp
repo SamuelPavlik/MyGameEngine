@@ -1,6 +1,5 @@
 #include "C_Animation.hpp"
 #include "Object.hpp"
-#include "Animation.hpp"
 #include "C_Sprite.hpp"
 
 C_Animation::C_Animation(Object* owner) : Component(owner),
@@ -45,4 +44,10 @@ void C_Animation::SetAnimationState(AnimationState state) {
 
 const AnimationState& C_Animation::GetAnimationState() const {
     return currentAnimation.first;
+}
+
+void C_Animation::SetAnimationDirection(FacingDirection dir) {
+    if (currentAnimation.first != AnimationState::None) {
+        currentAnimation.second->SetDirection(dir);
+    }
 }

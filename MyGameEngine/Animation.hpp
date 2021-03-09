@@ -12,9 +12,15 @@ struct FrameData {
     float displayTimeSeconds;
 };
 
+enum class FacingDirection {
+    None,
+    Left,
+    Right
+};
+
 class Animation {
 public:
-    Animation();
+    Animation(FacingDirection direction);
 
     void AddFrame(int textureID, int x, int y,
         int width, int height, float frameTime);
@@ -24,6 +30,10 @@ public:
     bool UpdateFrame(float deltaTime);
 
     void Reset();
+
+    void SetDirection(FacingDirection direction);
+
+    FacingDirection GetDirection() const;
 
 private:
     void IncrementFrame();
@@ -36,6 +46,8 @@ private:
 
     // We use this to decide when to transition to the next frame.
     float currentFrameTime;
+
+    FacingDirection direction;
 };
 
 #endif /* Animation_hpp */
