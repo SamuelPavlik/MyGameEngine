@@ -7,10 +7,10 @@
 struct TileInfo {
     TileInfo() : tileID(-1) {}
 
-    TileInfo(int textureID, unsigned int tileID, sf::IntRect textureRect)
+    TileInfo(int textureID, long long tileID, sf::IntRect textureRect)
         : textureID(textureID), tileID(tileID), textureRect(textureRect) {}
 
-    int tileID;
+    long long tileID;
     int textureID;
     sf::IntRect textureRect;
 };

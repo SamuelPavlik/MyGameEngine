@@ -172,9 +172,18 @@
     <Image Include="..\..\..\..\Downloads\Jungle Tiles.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="grass-tiles-2-small.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="tree2-final.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Downloads\Test Map 1.tmx">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="MyFirstTiledMap.tmx">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

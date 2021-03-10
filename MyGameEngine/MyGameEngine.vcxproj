@@ -204,10 +204,13 @@
     <Image Include="..\..\..\..\Downloads\Jungle Tiles.png" />
     <Image Include="..\..\..\..\Pictures\TanksCover.PNG" />
     <Image Include="..\attack_0.png" />
+    <Image Include="grass-tiles-2-small.png" />
+    <Image Include="tree2-final.png" />
     <Image Include="viking_sheet.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Downloads\Test Map 1.tmx" />
+    <None Include="MyFirstTiledMap.tmx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,6 +8,8 @@
 #include "Animation.hpp"
 #include "ResourceAllocator.hpp"
 
+#include <iostream>
+
 SceneGame::SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocator<sf::Texture>& textureAllocator) :
     workingDir(workingDir),
     input{input},
@@ -56,14 +58,17 @@ void SceneGame::OnCreate() {
     animation->AddAnimation(AnimationState::Walk, walkAnimation);
     animation->AddAnimation(AnimationState::Idle, idleAnimation);
 
-    //adding player to collection
-    objects.Add(player);
-
-    sf::Vector2i mapOffset(-100, 128);
+    sf::Vector2i mapOffset(-192, -360);
     std::vector<std::shared_ptr<Object>> levelTiles = 
         mapParser.Parse(workingDir.Get() + "Test Map 1.tmx", mapOffset);
 
+    //for (auto& obj : levelTiles) {
+    //    std::cout << "X: " << obj->GetComponent<C_Transform>()->GetPosition().x << "Y: " << obj->GetComponent<C_Transform>()->GetPosition().y << std::endl;
+    //}
+
     objects.Add(levelTiles);
+    //adding player to collection
+    objects.Add(player);
 }
 
 void SceneGame::OnDestroy() {}

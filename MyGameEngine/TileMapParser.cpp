@@ -6,6 +6,7 @@
 #include "ResourceAllocator.hpp"
 
 #include <string>
+#include <iostream>
 
 TileMapParser::TileMapParser(ResourceAllocator<sf::Texture>& textureAllocator)
     : textureAllocator(textureAllocator) {
@@ -133,18 +134,18 @@ std::pair<std::string, std::shared_ptr<Layer>> TileMapParser::BuildLayer(
         std::string substr;
         std::getline(fileStream, substr, ',');
 
-            if (!Utilities::IsInteger(substr)) {
-                // We remove special characters from the int before parsing
-                substr.erase(
-                    std::remove(substr.begin(), substr.end(), '\r'), substr.end());
-                substr.erase(
-                    std::remove(substr.begin(), substr.end(), '\n'), substr.end());
+        if (!Utilities::IsInteger(substr)) {
+            // We remove special characters from the int before parsing
+            substr.erase(
+                std::remove(substr.begin(), substr.end(), '\r'), substr.end());
+            substr.erase(
+                std::remove(substr.begin(), substr.end(), '\n'), substr.end());
 
-                //TODO: add additional check to 
-                //confirm that the character removals have worked:
-            }
+            //TODO: add additional check to 
+            //confirm that the character removals have worked:
+        }
 
-        int tileId = std::stoi(substr); // 3
+        long long tileId = std::stoll(substr);
 
         if (tileId != 0) {
             auto itr = tileSet.find(tileId);
@@ -168,12 +169,11 @@ std::pair<std::string, std::shared_ptr<Layer>> TileMapParser::BuildLayer(
             std::shared_ptr<Tile> tile = std::make_shared<Tile>();
 
             // Bind properties of a tile from a set.
-            tile->properties = itr->second; // 7
+            tile->properties = itr->second;
             tile->x = count % width - 1;
             tile->y = count / width;
 
-
-            layer->emplace_back(tile); // 8
+            layer->emplace_back(tile);
         }
 
         count++;
