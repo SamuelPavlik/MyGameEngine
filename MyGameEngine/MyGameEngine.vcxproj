@@ -209,6 +209,7 @@
     <Image Include="..\..\..\..\Pictures\TanksCover.PNG" />
     <Image Include="..\attack_0.png" />
     <Image Include="grass-tiles-2-small.png" />
+    <Image Include="RedSquare.png" />
     <Image Include="tree2-final.png" />
     <Image Include="viking_sheet.png" />
   </ItemGroup>

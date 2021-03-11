@@ -190,6 +190,9 @@
     <Image Include="tree2-final.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RedSquare.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Downloads\Test Map 1.tmx">

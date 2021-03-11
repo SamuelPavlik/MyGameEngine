@@ -4,9 +4,6 @@
 #include "Object.hpp"
 #include "S_Drawable.hpp"
 
-#include <memory>
-#include <vector>
-
 class ObjectCollection {
 public:
     void Add(std::shared_ptr<Object> object);
