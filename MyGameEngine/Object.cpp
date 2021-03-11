@@ -1,4 +1,5 @@
 #include "Object.hpp"
+#include "C_Drawable.hpp"
 
 Object::Object() : queuedForRemoval(false) {
     transform = AddComponent<C_Transform>();
@@ -29,15 +30,17 @@ void Object::LateUpdate(float timeDelta) {
 }
 
 void Object::Draw(Window& window) {
-    for (int i = components.size() - 1; i >= 0; i--) {
-        components[i]->Draw(window);
-    }
+    drawable->Draw(window);
 }
 
 void Object::QueueForRemoval() {
     queuedForRemoval = true;
 }
 
-bool Object::IsQueuedForRemoval() {
+std::shared_ptr<C_Drawable> Object::GetDrawable() const {
+    return drawable;
+}
+
+bool Object::IsQueuedForRemoval() const {
     return queuedForRemoval;
 }

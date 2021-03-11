@@ -154,6 +154,7 @@
     <ClCompile Include="Bitmask.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="C_Animation.cpp" />
+    <ClCompile Include="C_Drawable.cpp" />
     <ClCompile Include="C_KeyboardMovement.cpp" />
     <ClCompile Include="C_Sprite.cpp" />
     <ClCompile Include="C_Transform.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="SceneSplashScreen.cpp" />
     <ClCompile Include="SceneStateMachine.cpp" />
+    <ClCompile Include="S_Drawable.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMapParser.cpp" />
     <ClCompile Include="Utilities.cpp" />
@@ -182,6 +184,7 @@
     <ClInclude Include="Bitmask.hpp" />
     <ClInclude Include="Component.hpp" />
     <ClInclude Include="C_Animation.hpp" />
+    <ClInclude Include="C_Drawable.hpp" />
     <ClInclude Include="C_KeyboardMovement.hpp" />
     <ClInclude Include="C_Sprite.hpp" />
     <ClInclude Include="C_Transform.hpp" />
@@ -194,6 +197,7 @@
     <ClInclude Include="SceneGame.hpp" />
     <ClInclude Include="SceneSplashScreen.hpp" />
     <ClInclude Include="SceneStateMachine.hpp" />
+    <ClInclude Include="S_Drawable.hpp" />
     <ClInclude Include="Tile.hpp" />
     <ClInclude Include="TileMapParser.hpp" />
     <ClInclude Include="Utilities.hpp" />

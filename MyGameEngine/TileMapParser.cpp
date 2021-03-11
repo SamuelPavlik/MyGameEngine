@@ -34,6 +34,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse
     // This will contain all of our tiles as objects.
     std::vector<std::shared_ptr<Object>> tileObjects;
 
+    int layerCount = layerMap->size() - 1;
     // We iterate through each layer in the tile map
     for (const auto& layer : *layerMap) {
         // And each tile in the layer
@@ -50,6 +51,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse
             sprite->Load(tileInfo->textureID);
             sprite->SetTextureRect(tileInfo->textureRect);
             sprite->SetScale(tileScale, tileScale);
+            sprite->SetSortOrder(layerCount);
             // Calculate world position.
             float x = tile->x * tileSizeX * tileScale + offset.x;
             float y = tile->y * tileSizeY * tileScale + offset.y;
@@ -58,6 +60,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse
             // Add new tile Object to the collection.
             tileObjects.emplace_back(tileObject);
         }
+        layerCount--;
     }
 
     return tileObjects;

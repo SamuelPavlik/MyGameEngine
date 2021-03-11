@@ -2,11 +2,12 @@
 #define C_Sprite_hpp
 
 #include "Component.hpp"
+#include "C_Drawable.hpp"
 
 template<typename T>
 class ResourceAllocator;
 
-class C_Sprite : public Component {
+class C_Sprite : public Component, public C_Drawable {
 public:
     C_Sprite(Object* owner, ResourceAllocator<sf::Texture>* allocator);
 

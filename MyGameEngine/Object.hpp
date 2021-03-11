@@ -5,6 +5,8 @@
 #include "Component.hpp"
 #include "C_Transform.hpp"
 
+class C_Drawable;
+
 class Object {
 public:
     Object();
@@ -19,14 +21,15 @@ public:
     void Update(float deltaTime);
     void LateUpdate(float deltaTime);
     void Draw(Window& window);
-    bool IsQueuedForRemoval();
+    bool IsQueuedForRemoval() const;
     void QueueForRemoval();
+    std::shared_ptr<C_Drawable> GetDrawable() const;
 
     template <typename T, typename... Args> std::shared_ptr<T> AddComponent(Args... args) {
         static_assert(std::is_base_of<Component, T>::value,
             "T must derive from Component");
 
-        // Check that we don't already have a component of this type.
+        // Check that we don't already have a component of this type
         for (auto& exisitingComponent : components) {
             if (std::dynamic_pointer_cast<T>(exisitingComponent)) {
                 return std::dynamic_pointer_cast<T>(exisitingComponent);
@@ -35,6 +38,11 @@ public:
 
         std::shared_ptr<T> newComponent = std::make_shared<T>(this, args...);
         components.push_back(newComponent);
+
+        // Check if the component is a drawable
+        if (std::dynamic_pointer_cast<C_Drawable>(newComponent)) {
+            drawable = std::dynamic_pointer_cast<C_Drawable>(newComponent);
+        }
 
         return newComponent;
     };
@@ -59,7 +67,7 @@ public:
 
 private:
     std::vector<std::shared_ptr<Component>> components;
-
+    std::shared_ptr<C_Drawable> drawable;
 };
 
 #endif /* Object_hpp */

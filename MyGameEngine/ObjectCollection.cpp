@@ -1,4 +1,5 @@
 #include "ObjectCollection.hpp"
+
 #include <algorithm>
 
 void ObjectCollection::Update(float deltaTime) {
@@ -14,9 +15,7 @@ void ObjectCollection::LateUpdate(float deltaTime) {
 }
 
 void ObjectCollection::Draw(Window& window) {
-    for (auto& o : objects) {
-        o->Draw(window);
-    }
+    drawables.Draw(window);
 }
 
 void ObjectCollection::Add(std::shared_ptr<Object> object) {
@@ -38,6 +37,7 @@ void ObjectCollection::ProcessNewObjects() {
         }
 
         objects.insert(objects.end(), newObjects.begin(), newObjects.end());
+        drawables.Add(newObjects);
         newObjects.clear();
     }
 }
@@ -45,16 +45,5 @@ void ObjectCollection::ProcessNewObjects() {
 void ObjectCollection::ProcessRemovals() {
     std::remove_if(objects.begin(), objects.end(),
         [](std::shared_ptr<Object> obj) { return obj->IsQueuedForRemoval(); });
-
-    //auto objIterator = objects.begin();
-    //while (objIterator != objects.end()) {
-    //    auto obj = **objIterator;
-
-    //    if (obj.IsQueuedForRemoval()) {
-    //        objIterator = objects.erase(objIterator);
-    //    }
-    //    else {
-    //        ++objIterator;
-    //    }
-    //}
+    drawables.ProcessRemovals();
 }
