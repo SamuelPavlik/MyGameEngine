@@ -17,10 +17,10 @@ class ResourceAllocator;
 
 using namespace rapidxml;
 using Layer = std::vector<std::shared_ptr<Tile>>;
-using MapTiles = std::map<std::string, std::shared_ptr<Layer>>;
-using TileSet = std::unordered_map<unsigned int, std::shared_ptr<TileInfo>>;
+using LayerMap = std::map<std::string, std::shared_ptr<Layer>>;
+using TileSetMap = std::unordered_map<unsigned int, std::shared_ptr<TileInfo>>;
 
-struct TileSheetData {
+struct TileSetData {
     // The texture id will be retrieved by using our texture allocator.
     int textureId; // The id of the tile sets texture. 
     sf::Vector2u imageSize; // The size of the texture.
@@ -28,6 +28,7 @@ struct TileSheetData {
     int rows; // How many rows in the tile sheet.
     sf::Vector2u tileSize; // The size of an individual tile.
 };
+using TileSets = std::map<int, std::shared_ptr<TileSetData>>;
 
 class TileMapParser {
 public:
@@ -36,12 +37,12 @@ public:
     std::vector<std::shared_ptr<Object>> Parse(const std::string& file, sf::Vector2i offset);
 
 private:
-    std::shared_ptr<TileSheetData> BuildTileSheetData(xml_node<>* rootNode);
+    std::shared_ptr<TileSets> BuildTileSets(xml_node<>* rootNode);
 
-    std::shared_ptr<MapTiles> BuildMapTiles(xml_node<>* rootNode);
+    std::shared_ptr<LayerMap> BuildLayerMap(xml_node<>* rootNode);
 
     std::pair<std::string, std::shared_ptr<Layer>> BuildLayer(
-        xml_node<>* layerNode, std::shared_ptr<TileSheetData> tileSheetData);
+        xml_node<>* layerNode, std::shared_ptr<TileSets> tileSets);
 
     ResourceAllocator<sf::Texture>& textureAllocator;
 };
