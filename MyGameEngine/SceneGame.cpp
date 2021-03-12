@@ -60,14 +60,10 @@ void SceneGame::OnCreate() {
 
     sf::Vector2i mapOffset(-192, -360);
     std::vector<std::shared_ptr<Object>> levelTiles = 
-        mapParser.Parse(workingDir.Get() + "Test Map 1 - Copy.tmx", mapOffset);
-
-    //for (auto& obj : levelTiles) {
-    //    std::cout << "X: " << obj->GetComponent<C_Transform>()->GetPosition().x << "Y: " << obj->GetComponent<C_Transform>()->GetPosition().y << std::endl;
-    //}
+        mapParser.Parse(workingDir.Get() + "MySecondTiledMap.tmx", mapOffset);
+        //mapParser.Parse(workingDir.Get() + "Test Map 1 - Copy.tmx", mapOffset);
 
     objects.Add(levelTiles);
-    //adding player to collection
     objects.Add(player);
 }
 

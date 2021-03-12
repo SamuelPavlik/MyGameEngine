@@ -40,7 +40,6 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse
         // And each tile in the layer
         for (const auto& tile : *layer.second) {
             std::shared_ptr<TileInfo> tileInfo = tile->properties;
-
             std::shared_ptr<Object> tileObject = std::make_shared<Object>();
 
             //TODO: tile scale should be set at the data level.
@@ -179,8 +178,8 @@ std::pair<std::string, std::shared_ptr<Layer>> TileMapParser::BuildLayer(
                     tileSet = tileSetIter->second;
                 }
 
-                int textureX = tileId % tileSet->columns - 1;
-                int textureY = tileId / tileSet->columns;
+                int textureX = (tileId - tileSetIter->first + 1) % tileSet->columns - 1;
+                int textureY = (tileId - tileSetIter->first + 1) / tileSet->columns;
 
                 std::shared_ptr<TileInfo> tileInfo =
                     std::make_shared<TileInfo>(

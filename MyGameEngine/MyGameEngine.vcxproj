@@ -216,6 +216,7 @@
   <ItemGroup>
     <None Include="..\..\..\..\Downloads\Test Map 1.tmx" />
     <None Include="MyFirstTiledMap.tmx" />
+    <None Include="MySecondTiledMap.tmx" />
     <None Include="Test Map 1 - Copy.tmx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
