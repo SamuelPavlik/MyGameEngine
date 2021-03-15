@@ -5,7 +5,7 @@
 S_Drawable::S_Drawable() {
     auto cmp = [](auto a, auto b) {
         return a->GetDrawable()->GetSortOrder()
-            < b->GetDrawable()->GetSortOrder(); };
+            > b->GetDrawable()->GetSortOrder(); };
     drawables = 
         std::multiset<std::shared_ptr<Object>, 
         std::function<bool(std::shared_ptr<Object>, std::shared_ptr<Object>)>>(cmp);

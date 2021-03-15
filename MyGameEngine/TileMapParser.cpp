@@ -90,7 +90,7 @@ std::shared_ptr<TileSets> TileMapParser::BuildTileSets(xml_node<>* rootNode) {
         tileSetData.rows = tileCount / tileSetData.columns;
 
        auto imageNode = tileSetNode->first_node("image");
-        tileSetData.textureId =
+       tileSetData.textureId =
             textureAllocator.Add(std::string(imageNode->first_attribute("source")->value()));
 
         //TODO: add error checking - we want to output a 
@@ -160,16 +160,6 @@ std::pair<std::string, std::shared_ptr<Layer>> TileMapParser::BuildLayer(
 
                 auto tileSetIter = std::find_if(tileSets->rbegin(), tileSets->rend(), [tileId](const auto& pairElem) {
                     return tileId >= pairElem.first; });
-                //for (auto iter = tileSets->rbegin();
-                //    iter != tileSets->rend(); ++iter) // 1
-                //{
-                //    if (tileId >= iter->first) // 2
-                //    {
-                //        // We know the tile belongs to this tileset.
-                //        tileSet = iter->second;
-                //        break;
-                //    }
-                //}
                 if (tileSetIter == tileSets->rend()){
                     //TODO: output error message.
                     continue;
@@ -178,8 +168,8 @@ std::pair<std::string, std::shared_ptr<Layer>> TileMapParser::BuildLayer(
                     tileSet = tileSetIter->second;
                 }
 
-                int textureX = (tileId - tileSetIter->first + 1) % tileSet->columns - 1;
-                int textureY = (tileId - tileSetIter->first + 1) / tileSet->columns;
+                int textureX = (tileId - tileSetIter->first) % tileSet->columns;
+                int textureY = (tileId - tileSetIter->first) / tileSet->columns;
 
                 std::shared_ptr<TileInfo> tileInfo =
                     std::make_shared<TileInfo>(
@@ -198,7 +188,7 @@ std::pair<std::string, std::shared_ptr<Layer>> TileMapParser::BuildLayer(
 
             // Bind properties of a tile from a set.
             tile->properties = itr->second;
-            tile->x = count % width - 1;
+            tile->x = count % width;
             tile->y = count / width;
 
             layer->emplace_back(tile);
