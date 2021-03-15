@@ -34,11 +34,12 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse
     // This will contain all of our tiles as objects.
     std::vector<std::shared_ptr<Object>> tileObjects;
 
-    int layerCount = layerMap->size() - 1;
     // We iterate through each layer in the tile map
     for (const auto& layer : *layerMap) {
+        if (!layer.second->isVisible)
+            continue;
         // And each tile in the layer
-        for (const auto& tile : *layer.second) {
+        for (const auto& tile : layer.second->tiles) {
             std::shared_ptr<TileInfo> tileInfo = tile->properties;
             std::shared_ptr<Object> tileObject = std::make_shared<Object>();
 
@@ -50,7 +51,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse
             sprite->Load(tileInfo->textureID);
             sprite->SetTextureRect(tileInfo->textureRect);
             sprite->SetScale(tileScale, tileScale);
-            sprite->SetSortOrder(layerCount);
+            sprite->SetSortOrder(layer.second->sortOrder);
             // Calculate world position.
             float x = tile->x * tileSizeX * tileScale + offset.x;
             float y = tile->y * tileSizeY * tileScale + offset.y;
@@ -59,7 +60,6 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse
             // Add new tile Object to the collection.
             tileObjects.emplace_back(tileObject);
         }
-        layerCount--;
     }
 
     return tileObjects;
@@ -110,9 +110,11 @@ std::shared_ptr<LayerMap> TileMapParser::BuildLayerMap(xml_node<>* rootNode) {
     auto tileSets = BuildTileSets(rootNode);
     std::shared_ptr<LayerMap> map = std::make_shared<LayerMap>();
 
+    size_t sortOrder = 0;
     for (xml_node<>* node = rootNode->first_node("layer"); node; node = node->next_sibling()) {
         std::pair<std::string, std::shared_ptr<Layer>> mapLayer =
             BuildLayer(node, tileSets);
+        mapLayer.second->sortOrder = sortOrder++;
         map->emplace(mapLayer);
     }
 
@@ -191,12 +193,21 @@ std::pair<std::string, std::shared_ptr<Layer>> TileMapParser::BuildLayer(
             tile->x = count % width;
             tile->y = count / width;
 
-            layer->emplace_back(tile);
+            layer->tiles.emplace_back(tile);
         }
 
         count++;
     }
 
+    // set layer visibility
+    bool layerVisible = true;
+    xml_attribute<>* visibleAttribute = layerNode->first_attribute("visible");
+    if (visibleAttribute)
+        layerVisible = std::stoi(visibleAttribute->value());
+    layer->isVisible = layerVisible;
+
+    // set layer name mapping
     const std::string layerName = layerNode->first_attribute("name")->value();
+
     return std::make_pair(layerName, layer);
 }

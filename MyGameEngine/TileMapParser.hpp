@@ -15,9 +15,14 @@ class Object;
 template<typename T>
 class ResourceAllocator;
 
+struct Layer {
+    std::vector<std::shared_ptr<Tile>> tiles;
+    bool isVisible;
+    int sortOrder;
+};
+
 using namespace rapidxml;
-using Layer = std::vector<std::shared_ptr<Tile>>;
-using LayerMap = std::map<std::string, std::shared_ptr<Layer>>;
+using LayerMap = std::unordered_map<std::string, std::shared_ptr<Layer>>;
 using TileSetMap = std::unordered_map<unsigned int, std::shared_ptr<TileInfo>>;
 
 struct TileSetData {

@@ -18,8 +18,7 @@ SceneGame::SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocat
 
 void SceneGame::OnCreate() {
     player = std::make_shared<Object>();
-    auto sprite = player->AddComponent<C_Sprite>(&textureAllocator);
-    sprite->SetSortOrder(1);
+    player->AddComponent<C_Sprite>(&textureAllocator);
     player->AddComponent<C_KeyboardMovement>(&input);
     auto animation = player->AddComponent<C_Animation>();
 
@@ -61,8 +60,8 @@ void SceneGame::OnCreate() {
 
     sf::Vector2i mapOffset(-192, -360);
     std::vector<std::shared_ptr<Object>> levelTiles = 
-        mapParser.Parse(workingDir.Get() + "MySecondTiledMap.tmx", mapOffset);
-        //mapParser.Parse(workingDir.Get() + "Test Map 1 - Copy.tmx", mapOffset);
+        //mapParser.Parse(workingDir.Get() + "MySecondTiledMap.tmx", mapOffset);
+        mapParser.Parse(workingDir.Get() + "Test Map 1 - Copy.tmx", mapOffset);
 
     objects.Add(levelTiles);
     objects.Add(player);
