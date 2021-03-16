@@ -1,0 +1,28 @@
+#ifndef C_BoxCollider_hpp
+#define C_BoxCollider_hpp
+
+#include "Component.hpp"
+#include "C_Collider.hpp"
+
+class C_BoxCollider : public C_Collider {
+public:
+    C_BoxCollider(Object* owner);
+
+    Manifold Intersects(std::shared_ptr<C_Collider> other) override;
+    void ResolveOverlap(const Manifold& m) override;
+
+    void SetCollidable(const sf::FloatRect& rect);
+    const sf::FloatRect& GetCollidable();
+
+private:
+    void SetPosition();
+    
+    static sf::FloatRect GetIntersectionRect(const sf::FloatRect& rect1, 
+        const sf::FloatRect& rect2);
+
+    sf::FloatRect AABB;
+    sf::Vector2f offset;
+
+};
+
+#endif /* C_BoxCollider_hpp */
