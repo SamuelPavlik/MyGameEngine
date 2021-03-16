@@ -1,7 +1,9 @@
 #include "Object.hpp"
 #include "C_Drawable.hpp"
 
-Object::Object() : queuedForRemoval(false) {
+size_t Object::count = 0;
+
+Object::Object() : queuedForRemoval(false), instanceID(count++) {
     transform = AddComponent<C_Transform>();
 }
 
@@ -39,6 +41,10 @@ void Object::QueueForRemoval() {
 
 std::shared_ptr<C_Drawable> Object::GetDrawable() const {
     return drawable;
+}
+
+const size_t Object::GetInstanceID() const {
+    return instanceID;
 }
 
 bool Object::IsQueuedForRemoval() const {

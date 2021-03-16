@@ -24,6 +24,7 @@ public:
     bool IsQueuedForRemoval() const;
     void QueueForRemoval();
     std::shared_ptr<C_Drawable> GetDrawable() const;
+    const size_t GetInstanceID() const;
 
     template <typename T, typename... Args> std::shared_ptr<T> AddComponent(Args... args) {
         static_assert(std::is_base_of<Component, T>::value,
@@ -68,6 +69,9 @@ public:
 private:
     std::vector<std::shared_ptr<Component>> components;
     std::shared_ptr<C_Drawable> drawable;
+    size_t instanceID;
+
+    static size_t count;
 };
 
 #endif /* Object_hpp */
