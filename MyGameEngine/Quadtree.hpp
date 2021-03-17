@@ -32,9 +32,8 @@ public:
     const sf::FloatRect& GetBounds() const;
 
 private:
-    void Search(const sf::FloatRect& area,
-        std::vector<std::shared_ptr<C_BoxCollider>>&
-        overlappingObjects);
+    void SearchInArea(const sf::FloatRect& area, 
+        std::vector<std::shared_ptr<C_BoxCollider>>& overlappingObjects);
 
     // Returns the index for the node that will contain 		
     // the object. -1 is returned if it is this node.
