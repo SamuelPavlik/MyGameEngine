@@ -1,11 +1,11 @@
 #ifndef Quadtree_hpp
 #define Quadtree_hpp
 
+#include <SFML/Graphics.hpp>
+
 #include <memory>
 #include <vector>
 #include <array>
-
-#include "Object.hpp"
 
 class C_BoxCollider;
 

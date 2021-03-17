@@ -171,6 +171,7 @@
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="SceneSplashScreen.cpp" />
     <ClCompile Include="SceneStateMachine.cpp" />
+    <ClCompile Include="S_Collidable.cpp" />
     <ClCompile Include="S_Drawable.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMapParser.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="SceneGame.hpp" />
     <ClInclude Include="SceneSplashScreen.hpp" />
     <ClInclude Include="SceneStateMachine.hpp" />
+    <ClInclude Include="S_Collidable.hpp" />
     <ClInclude Include="S_Drawable.hpp" />
     <ClInclude Include="Tile.hpp" />
     <ClInclude Include="TileMapParser.hpp" />

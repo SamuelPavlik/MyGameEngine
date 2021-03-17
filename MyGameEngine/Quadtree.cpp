@@ -1,5 +1,6 @@
 #include "Quadtree.hpp"
 #include "C_BoxCollider.hpp"
+#include "Object.hpp"
 
 #include <algorithm>
 
@@ -112,7 +113,7 @@ void Quadtree::SearchInArea(const sf::FloatRect& area,
 
         if (index == thisTree) {
             for (int i = 0; i < 4; i++) {
-                if (children[i]->GetBounds().intersects(area))                 {
+                if (children[i]->GetBounds().intersects(area)) {
                     children[i]->SearchInArea(area, overlappingObjects);
                 }
             }

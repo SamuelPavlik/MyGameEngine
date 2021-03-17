@@ -27,9 +27,6 @@ public:
     const size_t GetInstanceID() const;
 
     template <typename T, typename... Args> std::shared_ptr<T> AddComponent(Args... args) {
-        static_assert(std::is_base_of<Component, T>::value,
-            "T must derive from Component");
-
         // Check that we don't already have a component of this type
         for (auto& exisitingComponent : components) {
             if (std::dynamic_pointer_cast<T>(exisitingComponent)) {
@@ -49,9 +46,6 @@ public:
     };
 
     template <typename T> std::shared_ptr<T> GetComponent() {
-        static_assert(std::is_base_of<Component, T>::value,
-            "T must derive from Component");
-
         // Check that we don't already have a component of this type.
         for (auto& exisitingComponent : components) {
             if (std::dynamic_pointer_cast<T>(exisitingComponent)) {
