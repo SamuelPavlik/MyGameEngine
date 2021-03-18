@@ -31,6 +31,8 @@ public:
     // Returns the bounds of this node.
     const sf::FloatRect& GetBounds() const;
 
+    const bool ContainsNull() const;
+
 private:
     void SearchInArea(const sf::FloatRect& area, 
         std::vector<std::shared_ptr<C_BoxCollider>>& overlappingObjects);
@@ -53,9 +55,11 @@ private:
 
     Quadtree* parent;
     std::array<std::shared_ptr<Quadtree>, 4> children;
-    std::vector<std::shared_ptr<C_BoxCollider>> objects;
     int level;
     sf::FloatRect bounds;
+
+public:
+    std::vector<std::shared_ptr<C_BoxCollider>> objects;
 };
 
 #endif /* Quadtree_hpp */

@@ -34,3 +34,7 @@ bool Window::IsOpen() const {
 sf::Vector2u Window::GetCentre() const {
     return window.getSize() / 2u;
 }
+
+void Window::Draw(const sf::Vertex* vertices, std::size_t vertexCount, sf::PrimitiveType type) {
+    window.draw(vertices, vertexCount, type);
+}

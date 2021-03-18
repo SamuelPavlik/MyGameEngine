@@ -15,6 +15,8 @@ public:
 
     bool IsOpen() const;
     sf::Vector2u GetCentre() const;
+    void Draw(const sf::Vertex* vertices,
+        std::size_t vertexCount, sf::PrimitiveType type);
 
 private:
     sf::RenderWindow window;

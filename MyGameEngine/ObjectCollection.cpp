@@ -6,6 +6,7 @@ void ObjectCollection::Update(float deltaTime) {
     for (auto& o : objects) {
         o->Update(deltaTime);
     }
+    collidables.Update();
 }
 
 void ObjectCollection::LateUpdate(float deltaTime) {
@@ -38,12 +39,25 @@ void ObjectCollection::ProcessNewObjects() {
 
         objects.insert(objects.end(), newObjects.begin(), newObjects.end());
         drawables.Add(newObjects);
+        collidables.Add(newObjects);
         newObjects.clear();
     }
 }
 
 void ObjectCollection::ProcessRemovals() {
-    std::remove_if(objects.begin(), objects.end(),
-        [](std::shared_ptr<Object> obj) { return obj->IsQueuedForRemoval(); });
-    drawables.ProcessRemovals();
+    bool isRemovedSth = false;
+    auto newEnd = std::remove_if(objects.begin(), objects.end(),
+        [&isRemovedSth](std::shared_ptr<Object> obj) { 
+            if (obj->IsQueuedForRemoval()) {
+                isRemovedSth = true;
+                return true;
+            }
+            return false; 
+        });
+    objects.erase(newEnd, objects.end());
+
+    if (isRemovedSth) {
+        drawables.ProcessRemovals();
+        collidables.ProcessRemovals();
+    }
 }

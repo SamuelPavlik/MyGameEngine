@@ -2,8 +2,9 @@
 #include "Tile.hpp"
 #include "Utilities.hpp"
 #include "Object.hpp"
-#include "C_Sprite.hpp"
 #include "ResourceAllocator.hpp"
+#include "C_Sprite.hpp"
+#include "C_BoxCollider.hpp"
 
 #include <string>
 #include <iostream>
@@ -36,8 +37,8 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse
 
     // We iterate through each layer in the tile map
     for (const auto& layer : *layerMap) {
-        if (!layer.second->isVisible)
-            continue;
+        /*if (!layer.second->isVisible)
+            continue;*/
         // And each tile in the layer
         for (const auto& tile : layer.second->tiles) {
             std::shared_ptr<TileInfo> tileInfo = tile->properties;
@@ -46,16 +47,29 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse
             //TODO: tile scale should be set at the data level.
             const unsigned int tileScale = 3;
 
-            // Allocate sprite.
-            auto sprite = tileObject->AddComponent<C_Sprite>(&textureAllocator);
-            sprite->Load(tileInfo->textureID);
-            sprite->SetTextureRect(tileInfo->textureRect);
-            sprite->SetScale(tileScale, tileScale);
-            sprite->SetSortOrder(layer.second->sortOrder);
+            // Allocate sprite if needed
+            if (layer.second->isVisible) {
+                auto sprite = tileObject->AddComponent<C_Sprite>(&textureAllocator);
+                sprite->Load(tileInfo->textureID);
+                sprite->SetTextureRect(tileInfo->textureRect);
+                sprite->SetScale(tileScale, tileScale);
+                sprite->SetSortOrder(layer.second->sortOrder);
+            }
             // Calculate world position.
             float x = tile->x * tileSizeX * tileScale + offset.x;
             float y = tile->y * tileSizeY * tileScale + offset.y;
             tileObject->transform->SetPosition(x, y);
+
+            // Set collision component if required
+            if (layer.first == "Collisions") {
+                float left = x - (tileSizeX * tileScale) * 0.5f;
+                float top = y - (tileSizeY * tileScale) * 0.5f;
+                float width = tileSizeX * tileScale;
+                float height = tileSizeY * tileScale;
+                auto collider = tileObject->AddComponent<C_BoxCollider>(
+                    sf::FloatRect(left, top, width, height), CollisionLayer::Tile);
+                tileObject->transform->SetStatic(true);
+            }
 
             // Add new tile Object to the collection.
             tileObjects.emplace_back(tileObject);
@@ -110,7 +124,7 @@ std::shared_ptr<LayerMap> TileMapParser::BuildLayerMap(xml_node<>* rootNode) {
     auto tileSets = BuildTileSets(rootNode);
     std::shared_ptr<LayerMap> map = std::make_shared<LayerMap>();
 
-    size_t sortOrder = 0;
+    int sortOrder = 0;
     for (xml_node<>* node = rootNode->first_node("layer"); node; node = node->next_sibling()) {
         std::pair<std::string, std::shared_ptr<Layer>> mapLayer =
             BuildLayer(node, tileSets);

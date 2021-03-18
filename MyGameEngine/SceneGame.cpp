@@ -5,6 +5,7 @@
 #include "C_Sprite.hpp"
 #include "C_KeyboardMovement.hpp"
 #include "C_Animation.hpp"
+#include "C_BoxCollider.hpp"
 #include "Animation.hpp"
 #include "ResourceAllocator.hpp"
 
@@ -22,7 +23,7 @@ void SceneGame::OnCreate() {
     player->AddComponent<C_KeyboardMovement>(&input);
     auto animation = player->AddComponent<C_Animation>();
 
-    //idle anim definition
+    // idle anim definition
     int vikingTextureID = textureAllocator.Add(workingDir.Get() + "viking_sheet.png");
     const int frameWidth = 165;
     const int frameHeight = 145;
@@ -38,7 +39,7 @@ void SceneGame::OnCreate() {
     idleAnimation->AddFrame(vikingTextureID, 200, 145,
         frameWidth, frameHeight, idleAnimFrameSeconds);
 
-    //walking anim definition
+    // walking anim definition
     std::shared_ptr<Animation> walkAnimation =
         std::make_shared<Animation>(FacingDirection::Right);
     const float walkAnimFrameSeconds = 0.15f;
@@ -54,7 +55,7 @@ void SceneGame::OnCreate() {
     walkAnimation->AddFrame(vikingTextureID, 400, 435,
         frameWidth, frameHeight, walkAnimFrameSeconds);
 
-    //add animations to our Viking
+    // add animations to our Viking
     animation->AddAnimation(AnimationState::Walk, walkAnimation);
     animation->AddAnimation(AnimationState::Idle, idleAnimation);
 
@@ -62,6 +63,10 @@ void SceneGame::OnCreate() {
     std::vector<std::shared_ptr<Object>> levelTiles = 
         //mapParser.Parse(workingDir.Get() + "MySecondTiledMap.tmx", mapOffset);
         mapParser.Parse(workingDir.Get() + "Test Map 1 - Copy.tmx", mapOffset);
+
+    // add collision component
+    player->AddComponent<C_BoxCollider>(sf::FloatRect(0, 0, frameWidth, frameHeight),
+        CollisionLayer::Player);
 
     objects.Add(levelTiles);
     objects.Add(player);

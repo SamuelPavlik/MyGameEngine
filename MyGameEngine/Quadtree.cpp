@@ -31,7 +31,7 @@ void Quadtree::Insert(std::shared_ptr<C_BoxCollider> object) {
         level < maxLevels && children[0] == nullptr) {
         Split();
 
-        std::remove_if(objects.begin(), objects.end(), [this](auto obj) {
+        auto newEnd = std::remove_if(objects.begin(), objects.end(), [this](auto obj) {
             int indexToPlaceObject =
                 GetChildIndexForObject(obj->GetCollidable());
 
@@ -41,21 +41,7 @@ void Quadtree::Insert(std::shared_ptr<C_BoxCollider> object) {
             }
             return false;
         });
-        /*auto objIterator = objects.begin();
-        while (objIterator != objects.end()) {
-            auto obj = *objIterator;
-            int indexToPlaceObject =
-                GetChildIndexForObject(obj->GetCollidable());
-
-            if (indexToPlaceObject != thisTree) {
-                children[indexToPlaceObject]->Insert(obj);
-                objIterator = objects.erase(objIterator);
-
-            }
-            else             {
-                ++objIterator;
-            }
-        }*/
+        objects.erase(newEnd, objects.end());
     }
 }
 
@@ -102,6 +88,14 @@ std::vector<std::shared_ptr<C_BoxCollider>> Quadtree::Search(const sf::FloatRect
 
 const sf::FloatRect& Quadtree::GetBounds() const {
     return bounds;
+}
+
+const bool Quadtree::ContainsNull() const {
+    for (auto& child : children) {
+        if (child && child->ContainsNull())
+            return true;
+    }
+    return std::find(objects.begin(), objects.end(), nullptr) != objects.end();
 }
 
 void Quadtree::SearchInArea(const sf::FloatRect& area,

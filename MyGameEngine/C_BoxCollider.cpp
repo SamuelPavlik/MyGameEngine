@@ -1,14 +1,23 @@
 #include "C_BoxCollider.hpp"
 #include "Object.hpp"
 
-C_BoxCollider::C_BoxCollider(Object* owner) : C_Collider(owner),
-offset(sf::Vector2f(0.f, 0.f)) {
+C_BoxCollider::C_BoxCollider(Object* owner) : 
+    C_Collider(owner),
+    layer(CollisionLayer::Default),
+    offset(sf::Vector2f(0.f, 0.f)) {
 }
+
+C_BoxCollider::C_BoxCollider(Object* owner, sf::FloatRect AABB,
+    CollisionLayer layer, sf::Vector2f offset) :
+    C_Collider(owner),
+    AABB(AABB),
+    layer(layer),
+    offset(offset) {}
 
 Manifold C_BoxCollider::Intersects(std::shared_ptr<C_Collider> other) {
     Manifold m;
-    std::shared_ptr<C_BoxCollider> boxCollider
-        = std::dynamic_pointer_cast<C_BoxCollider>(other);
+    std::shared_ptr<C_BoxCollider> boxCollider = 
+        std::dynamic_pointer_cast<C_BoxCollider>(other);
 
     if (boxCollider) {
         const sf::FloatRect& rect1 = GetCollidable();
@@ -69,6 +78,10 @@ void C_BoxCollider::ResolveOverlap(const Manifold& m) {
 void C_BoxCollider::SetCollidable(const sf::FloatRect& rect) {
     AABB = rect;
     SetPosition();
+}
+
+void C_BoxCollider::SetLayer(CollisionLayer layer) {
+    this->layer = layer;
 }
 
 const sf::FloatRect& C_BoxCollider::GetCollidable() {

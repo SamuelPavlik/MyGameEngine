@@ -5,7 +5,10 @@
 #include <SFML/Graphics.hpp>
 
 struct TileInfo {
-    TileInfo() : tileID(-1) {}
+    TileInfo() : 
+        tileID(-1), 
+        textureID(-1), 
+        textureRect(sf::IntRect(0, 0, 0, 0)) {}
 
     TileInfo(int textureID, long long tileID, sf::IntRect textureRect)
         : textureID(textureID), tileID(tileID), textureRect(textureRect) {}
