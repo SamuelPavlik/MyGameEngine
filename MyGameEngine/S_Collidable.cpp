@@ -1,6 +1,7 @@
 #include "S_Collidable.hpp"
 #include "Object.hpp"
 #include "C_BoxCollider.hpp"
+#include "Debug.hpp"
 
 #include <algorithm>
 
@@ -37,6 +38,8 @@ void S_Collidable::ProcessRemovals() {
 }
 
 void S_Collidable::Update() {
+    //collisionTree.DrawDebug();
+
     collisionTree.Clear();
     for (auto& maps : collidables) {
         for (auto& collidable : maps.second) {
@@ -79,6 +82,9 @@ void S_Collidable::Resolve() {
                     Manifold m = collidableObj->Intersects(collisionObj);
 
                     if (m.colliding) {
+                        Debug::DrawRect(collisionObj->GetCollidable(), sf::Color::Red);
+                        Debug::DrawRect(collidableObj->GetCollidable(), sf::Color::Red);
+
                         if (collisionObj->owner->transform->IsStatic()) {
                             collidableObj->ResolveOverlap(m);
                         }

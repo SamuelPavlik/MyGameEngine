@@ -45,7 +45,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse
             std::shared_ptr<Object> tileObject = std::make_shared<Object>();
 
             //TODO: tile scale should be set at the data level.
-            const unsigned int tileScale = 3;
+            const float tileScale = 1.5f;
 
             // Allocate sprite if needed
             if (layer.second->isVisible) {

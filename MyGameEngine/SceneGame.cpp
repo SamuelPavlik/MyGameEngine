@@ -8,6 +8,7 @@
 #include "C_BoxCollider.hpp"
 #include "Animation.hpp"
 #include "ResourceAllocator.hpp"
+#include "Debug.hpp"
 
 #include <iostream>
 
@@ -31,7 +32,7 @@ void SceneGame::OnCreate() {
     const float idleAnimFrameSeconds = 0.2f;
 
     idleAnimation->AddFrame(vikingTextureID, 600, 0,
-        frameWidth, frameHeight, idleAnimFrameSeconds);//3
+        frameWidth, frameHeight, idleAnimFrameSeconds);
     idleAnimation->AddFrame(vikingTextureID, 800, 0,
         frameWidth, frameHeight, idleAnimFrameSeconds);
     idleAnimation->AddFrame(vikingTextureID, 0, 145,
@@ -59,14 +60,16 @@ void SceneGame::OnCreate() {
     animation->AddAnimation(AnimationState::Walk, walkAnimation);
     animation->AddAnimation(AnimationState::Idle, idleAnimation);
 
-    sf::Vector2i mapOffset(-192, -360);
+    sf::Vector2i mapOffset(-0, 400);
     std::vector<std::shared_ptr<Object>> levelTiles = 
         //mapParser.Parse(workingDir.Get() + "MySecondTiledMap.tmx", mapOffset);
         mapParser.Parse(workingDir.Get() + "Test Map 1 - Copy.tmx", mapOffset);
 
     // add collision component
-    player->AddComponent<C_BoxCollider>(sf::FloatRect(0, 0, frameWidth, frameHeight),
+    player->AddComponent<C_BoxCollider>(sf::FloatRect(0, 0, frameWidth / 2, frameHeight / 1.5f),
         CollisionLayer::Player);
+
+    player->transform->SetPosition(sf::Vector2f(50, 650));
 
     objects.Add(levelTiles);
     objects.Add(player);
@@ -87,5 +90,6 @@ void SceneGame::LateUpdate(float deltaTime) {
 
 void SceneGame::Draw(Window& window) {
     objects.Draw(window);
+    Debug::Draw(window);
 }
 

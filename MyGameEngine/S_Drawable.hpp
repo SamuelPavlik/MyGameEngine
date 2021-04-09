@@ -19,7 +19,6 @@ public:
 
 private:
     void Add(std::shared_ptr<Object> object);
-    //void Sort();
 
     std::multiset<std::shared_ptr<Object>, std::function<bool(std::shared_ptr<Object>, std::shared_ptr<Object>)>> drawables;
 

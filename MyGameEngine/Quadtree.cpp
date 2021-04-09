@@ -1,6 +1,7 @@
 #include "Quadtree.hpp"
 #include "C_BoxCollider.hpp"
 #include "Object.hpp"
+#include "Debug.hpp"
 
 #include <algorithm>
 
@@ -96,6 +97,15 @@ const bool Quadtree::ContainsNull() const {
             return true;
     }
     return std::find(objects.begin(), objects.end(), nullptr) != objects.end();
+}
+
+void Quadtree::DrawDebug() {
+    if (children[0] != nullptr)    {
+        for (int i = 0; i < 4; i++)        {
+            children[i]->DrawDebug();
+        }
+    }
+    Debug::DrawRect(bounds, sf::Color::Red);
 }
 
 void Quadtree::SearchInArea(const sf::FloatRect& area,

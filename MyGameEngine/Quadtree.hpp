@@ -33,6 +33,8 @@ public:
 
     const bool ContainsNull() const;
 
+    void DrawDebug();
+
 private:
     void SearchInArea(const sf::FloatRect& area, 
         std::vector<std::shared_ptr<C_BoxCollider>>& overlappingObjects);
