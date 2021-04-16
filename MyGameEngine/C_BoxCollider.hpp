@@ -1,9 +1,7 @@
 #ifndef C_BoxCollider_hpp
 #define C_BoxCollider_hpp
 
-#include "Component.hpp"
 #include "C_Collider.hpp"
-#include "C_Drawable.hpp"
 
 class C_BoxCollider : public C_Collider {
 public:
@@ -12,7 +10,7 @@ public:
         CollisionLayer layer = CollisionLayer::Default, 
         sf::Vector2f offset = sf::Vector2f(0.f, 0.f));
 
-    Manifold Intersects(std::shared_ptr<C_Collider> other) override;
+    Manifold Intersects(const std::shared_ptr<C_Collider>& other) override;
     void ResolveOverlap(const Manifold& m) override;
 
     void SetCollidable(const sf::FloatRect& rect);

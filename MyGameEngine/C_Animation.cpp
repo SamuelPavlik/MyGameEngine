@@ -10,18 +10,19 @@ void C_Animation::Awake() {
 }
 
 void C_Animation::Update(float deltaTime) {
-    if (currentAnimation.first != AnimationState::None) {
-        bool newFrame = currentAnimation.second->UpdateFrame(deltaTime);
+    if (currentAnimation.first == AnimationState::None ||
+        !currentAnimation.second->UpdateFrame(deltaTime)) {
+        return;
+    }
 
-        if (newFrame) {
-            const FrameData data = *currentAnimation.second->GetCurrentFrame();
-            sprite->Load(data.id);
-            sprite->SetTextureRect(data.x, data.y, data.width, data.height);
-        }
+    const auto* data = currentAnimation.second->GetCurrentFrame();
+    if (data && sprite) {
+        sprite->Load(data->id);
+        sprite->SetTextureRect(data->x, data->y, data->width, data->height);
     }
 }
 
-void C_Animation::AddAnimation(AnimationState state, std::shared_ptr<Animation> animation) {
+void C_Animation::AddAnimation(AnimationState state, const std::shared_ptr<Animation>& animation) {
     animations.insert(std::make_pair(state, animation));
 
     if (currentAnimation.first == AnimationState::None) {

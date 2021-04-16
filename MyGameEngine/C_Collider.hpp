@@ -1,10 +1,10 @@
 #ifndef C_Collider_hpp
 #define C_Collider_hpp
 
+#include "Component.hpp"
+
 #include <memory>
 #include <SFML/Graphics.hpp>
-
-#include "Component.hpp"
 
 // enum ints used when defining collision layers
 enum class CollisionLayer {
@@ -24,7 +24,7 @@ public:
     C_Collider(Object* owner, CollisionLayer layer);
     ~C_Collider();
 
-    virtual Manifold Intersects(std::shared_ptr<C_Collider> other) = 0;
+    virtual Manifold Intersects(const std::shared_ptr<C_Collider>& other) = 0;
     virtual void ResolveOverlap(const Manifold& m) = 0;
 
     CollisionLayer GetLayer() const;
