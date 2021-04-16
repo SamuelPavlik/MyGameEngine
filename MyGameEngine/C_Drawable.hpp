@@ -1,9 +1,16 @@
 #ifndef C_Drawable_hpp
 #define C_Drawable_hpp
 
+#include "Window.hpp"
+
 #include <SFML/Graphics.hpp>
 
-#include "Window.hpp"
+enum class DrawLayer {
+    Default,
+    Background,
+    Foreground,
+    Entities
+};
 
 class C_Drawable {
 public:
@@ -15,8 +22,14 @@ public:
     void SetSortOrder(int order);
     int GetSortOrder() const;
 
+    void SetDrawLayer(DrawLayer layer);
+    DrawLayer GetDrawLayer() const;
+
+    virtual bool IsQueuedForRemoval() const = 0;
+
 private:
     int sortOrder;
+    DrawLayer layer;
 };
 
 #endif /* C_Drawable_hpp */

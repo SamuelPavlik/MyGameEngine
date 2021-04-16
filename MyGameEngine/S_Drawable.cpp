@@ -1,36 +1,51 @@
 #include "S_Drawable.hpp"
+#include "Object.hpp"
 
 #include <algorithm>
+#include <functional>
 
 S_Drawable::S_Drawable() {
-    auto cmp = [](auto a, auto b) {
-        return a->GetDrawable()->GetSortOrder()
-            < b->GetDrawable()->GetSortOrder(); };
-    drawables = 
-        std::multiset<std::shared_ptr<Object>, 
-        std::function<bool(std::shared_ptr<Object>, std::shared_ptr<Object>)>>(cmp);
+    drawablesMap = DrawablesMap();
 }
 
 void S_Drawable::Add(std::vector<std::shared_ptr<Object>>& objects) {
-    for (auto o : objects) Add(o);
+    for (auto& o : objects) {
+        Add(o);
+    }
 }
 
 void S_Drawable::ProcessRemovals() {
-    for (auto i = drawables.begin(), last = drawables.end(); i != last; ) {
-        if ((*i)->IsQueuedForRemoval())
-            i = drawables.erase(i);
-        else
-            ++i;
+    for (auto& layer : drawablesMap) {
+        std::remove_if(layer.second.begin(), layer.second.end(), [](auto& drawable) {
+            return drawable->IsQueuedForRemoval();
+        });
     }
 }
 
 void S_Drawable::Draw(Window& window) {
-    for (auto d : drawables) 
-        d->Draw(window);
+    Sort();
+
+    for (auto& layer : drawablesMap) {
+        for (auto& drawable : layer.second) {
+            drawable->Draw(window);
+        }
+    }
 }
 
-void S_Drawable::Add(std::shared_ptr<Object> object) {
-    if (object->GetDrawable()) {
-        drawables.insert(object);
+void S_Drawable::Add(std::shared_ptr<Object>& object) {
+    if (const auto& sprite = object->GetDrawable()) {
+        drawablesMap[sprite->GetDrawLayer()].push_back(sprite);
+    }
+}
+
+auto compareFunc = [](const std::shared_ptr<C_Drawable>& a, const std::shared_ptr<C_Drawable>& b) {
+    return a->GetSortOrder() < b->GetSortOrder();
+};
+
+void S_Drawable::Sort() {
+    for (auto& layer : drawablesMap) {
+        if (!std::is_sorted(layer.second.begin(), layer.second.end())) {
+            std::sort(layer.second.begin(), layer.second.end(), compareFunc);
+        }
     }
 }

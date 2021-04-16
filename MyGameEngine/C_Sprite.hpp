@@ -27,10 +27,13 @@ public:
 
     void SetScale(float x, float y);
 
+    virtual bool IsQueuedForRemoval() const override;
+
 private:
     ResourceAllocator<sf::Texture>* allocator;
     sf::Sprite sprite;
     int currentTextureID;
+
 };
 
 #endif /* C_Sprite_hpp */

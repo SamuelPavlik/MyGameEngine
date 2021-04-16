@@ -55,3 +55,7 @@ void C_Sprite::SetTextureRect(const sf::IntRect& rect) {
 void C_Sprite::SetScale(float x, float y) {
     sprite.setScale(x, y);
 }
+
+bool C_Sprite::IsQueuedForRemoval() const {
+    return owner->IsQueuedForRemoval();
+}

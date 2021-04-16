@@ -54,6 +54,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse
                 sprite->SetTextureRect(tileInfo->textureRect);
                 sprite->SetScale(tileScale, tileScale);
                 sprite->SetSortOrder(layer.second->sortOrder);
+                sprite->SetDrawLayer(DrawLayer::Background);
             }
             // Calculate world position.
             float x = tile->x * tileSizeX * tileScale + offset.x;
