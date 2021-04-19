@@ -7,29 +7,17 @@ class Bitmask {
 public:
     Bitmask();
 
-    // Overwrites this bitmask.
-    void SetMask(Bitmask& other);
-
-    // Returns binary representation of bitmask.
+    void SetMask(const Bitmask& other);
     uint32_t GetMask() const;
 
-    // Returns true if bit at pos = 1, else false.
     bool GetBit(size_t pos) const;
-
-    // Sets bit at specified pos to 1 or 0 (true or false).
     void SetBit(size_t pos, bool on);
-
-    // Sets bit at pos to 1.
     void SetBit(size_t pos);
-
-    // Sets bit at pos to 0.
     void ClearBit(size_t pos);
-
-    // Sets all bits to 0.
     void Clear();
 
 private:
-    uint32_t bits; // 1.
+    uint32_t bits;
 };
 
 #endif /* Bitmask_hpp */

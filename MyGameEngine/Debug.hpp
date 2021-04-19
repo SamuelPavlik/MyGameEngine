@@ -6,18 +6,18 @@
 #include <functional>
 #include <SFML/Graphics.hpp>
 
-#include "Window.hpp"
+class Window;
 
 class Debug {
 public:
     static void Draw(Window& window);
 
     static void DrawRect(const sf::FloatRect& rect,
-        sf::Color colour = sf::Color::White);
+        const sf::Color& colour = sf::Color::White);
 
     static void DrawLine(const sf::Vector2f& from,
         const sf::Vector2f& to,
-        sf::Color colour = sf::Color::White);
+        const sf::Color& colour = sf::Color::White);
 
     static void Log(const std::string& msg);
     static void LogWarning(const std::string& msg);

@@ -2,7 +2,7 @@
 
 Bitmask::Bitmask() : bits(0) {}
 
-void Bitmask::SetMask(Bitmask& other) {
+void Bitmask::SetMask(const Bitmask& other) {
     bits = other.GetMask();
 }
 
@@ -14,7 +14,6 @@ bool Bitmask::GetBit(size_t pos) const {
     return (bits & (1 << pos)) != 0;
 }
 
-// A simple helper method that calls set or clear bit
 void Bitmask::SetBit(size_t pos, bool on) {
     if (on) {
         SetBit(pos);

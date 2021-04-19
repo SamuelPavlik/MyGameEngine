@@ -1,7 +1,6 @@
 #ifndef Tile_h
 #define Tile_h
 
-#include "ResourceAllocator.hpp"
 #include <SFML/Graphics.hpp>
 
 struct TileInfo {

@@ -1,22 +1,23 @@
 #include "Debug.hpp"
+#include "Window.hpp"
 
 std::vector<sf::RectangleShape> Debug::rects = {};
 std::vector<std::array<sf::Vertex, 2>> Debug::lines = {};
 
 void Debug::Draw(Window& window) {
-    for (auto& r : rects) {
+    for (const auto& r : rects) {
         window.Draw(r);
     }
     rects.clear();
 
-    for (auto& l : lines) {
+    for (const auto& l : lines) {
         sf::Vertex line[2] = { l.at(0), l.at(1) };
         window.Draw(line, 2, sf::Lines);
     }
     lines.clear();
 }
 
-void Debug::DrawRect(const sf::FloatRect& rect, sf::Color colour) {
+void Debug::DrawRect(const sf::FloatRect& rect, const sf::Color& colour) {
     sf::Vector2f size(rect.width, rect.height);
     sf::Vector2f pos(rect.left, rect.top);
     sf::RectangleShape shape(size);
@@ -28,7 +29,7 @@ void Debug::DrawRect(const sf::FloatRect& rect, sf::Color colour) {
 }
 
 void Debug::DrawLine(const sf::Vector2f& from,
-    const sf::Vector2f& to, sf::Color colour) {
+    const sf::Vector2f& to, const sf::Color& colour) {
     lines.push_back({ sf::Vertex(from, colour), sf::Vertex(to, colour) });
 }
 

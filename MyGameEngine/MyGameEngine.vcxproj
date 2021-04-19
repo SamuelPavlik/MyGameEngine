@@ -173,9 +173,7 @@
     <ClCompile Include="SceneStateMachine.cpp" />
     <ClCompile Include="S_Collidable.cpp" />
     <ClCompile Include="S_Drawable.cpp" />
-    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMapParser.cpp" />
-    <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WorkingDirectory.cpp" />
   </ItemGroup>
