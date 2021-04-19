@@ -1,11 +1,11 @@
 #include "C_Transform.hpp"
 
-C_Transform::C_Transform(Object* owner) : 
+C_Transform::C_Transform(Object& owner) : 
     Component(owner), 
     position(0.f, 0.f), 
     isStaticTransform(false) {}
 
-C_Transform::C_Transform(Object* owner, bool isStaticTransform) : 
+C_Transform::C_Transform(Object& owner, bool isStaticTransform) : 
     Component(owner), 
     position(0.f, 0.f), 
     isStaticTransform(isStaticTransform) {}

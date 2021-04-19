@@ -5,6 +5,8 @@
 
 #include <SFML/Graphics.hpp>
 
+class Windows;
+
 enum class DrawLayer {
     Default,
     Background,

@@ -14,7 +14,7 @@ enum class AnimationState {
 
 class C_Animation : public Component {
 public:
-    C_Animation(Object* owner);
+    C_Animation(Object& owner);
 
     void Awake() override;
     void Update(float deltaTime) override;
@@ -29,7 +29,6 @@ public:
 private:
     std::shared_ptr<C_Sprite> sprite;
     std::map<AnimationState, std::shared_ptr<Animation>> animations;
-
     std::pair<AnimationState, std::shared_ptr<Animation>> currentAnimation;
 };
 #endif /* C_Animation_hpp */

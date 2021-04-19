@@ -26,7 +26,7 @@ public:
     std::shared_ptr<C_Drawable> GetDrawable() const;
     const size_t GetInstanceID() const;
 
-    template <typename T, typename... Args> std::shared_ptr<T> AddComponent(Args... args) {
+    template <typename T, typename... Args> std::shared_ptr<T> AddComponent(Args&&... args) {
         // Check that we don't already have a component of this type
         for (auto& exisitingComponent : components) {
             if (std::dynamic_pointer_cast<T>(exisitingComponent)) {
@@ -34,7 +34,7 @@ public:
             }
         }
 
-        std::shared_ptr<T> newComponent = std::make_shared<T>(this, args...);
+        std::shared_ptr<T> newComponent = std::make_shared<T>(*this, args...);
         components.push_back(newComponent);
 
         // Check if the component is a drawable

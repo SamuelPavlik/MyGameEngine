@@ -2,11 +2,11 @@
 #include "Object.hpp"
 #include "C_Sprite.hpp"
 
-C_Animation::C_Animation(Object* owner) : Component(owner),
+C_Animation::C_Animation(Object& owner) : Component(owner),
 currentAnimation(AnimationState::None, nullptr) {}
 
 void C_Animation::Awake() {
-    sprite = owner->GetComponent<C_Sprite>();
+    sprite = owner.GetComponent<C_Sprite>();
 }
 
 void C_Animation::Update(float deltaTime) {

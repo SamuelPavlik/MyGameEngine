@@ -1,13 +1,13 @@
 #include "C_BoxCollider.hpp"
 #include "Object.hpp"
 
-C_BoxCollider::C_BoxCollider(Object* owner) : 
+C_BoxCollider::C_BoxCollider(Object& owner) : 
     C_Collider(owner),
     layer(CollisionLayer::Default),
     offset(sf::Vector2f(0.f, 0.f)) {
 }
 
-C_BoxCollider::C_BoxCollider(Object* owner, sf::FloatRect AABB,
+C_BoxCollider::C_BoxCollider(Object& owner, sf::FloatRect AABB,
     CollisionLayer layer, sf::Vector2f offset) :
     C_Collider(owner),
     AABB(AABB),
@@ -32,7 +32,7 @@ Manifold C_BoxCollider::Intersects(const std::shared_ptr<C_Collider>& other) {
 }
 
 void C_BoxCollider::ResolveOverlap(const Manifold& m) {
-    auto transform = owner->transform;
+    auto transform = owner.transform;
 
     if (transform->IsStatic()) {
         return;
@@ -85,7 +85,7 @@ const sf::FloatRect& C_BoxCollider::GetCollidable() {
 }
 
 void C_BoxCollider::SetPosition() {
-    const auto& pos = owner->transform->GetPosition();
+    const auto& pos = owner.transform->GetPosition();
     AABB.left = pos.x - (AABB.width / 2) + offset.x;
     AABB.top = pos.y - (AABB.height / 2) + offset.y;
 }

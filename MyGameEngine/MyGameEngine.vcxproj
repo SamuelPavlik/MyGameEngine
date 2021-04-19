@@ -103,6 +103,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\pavli\source\repos\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,7 +153,6 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Bitmask.cpp" />
-    <ClCompile Include="Component.cpp" />
     <ClCompile Include="C_Animation.cpp" />
     <ClCompile Include="C_BoxCollider.cpp" />
     <ClCompile Include="C_Collider.cpp" />
@@ -187,6 +187,7 @@
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Bitmask.hpp" />
     <ClInclude Include="Component.hpp" />
+    <ClInclude Include="Constants.hpp" />
     <ClInclude Include="C_Animation.hpp" />
     <ClInclude Include="C_BoxCollider.hpp" />
     <ClInclude Include="C_Collider.hpp" />

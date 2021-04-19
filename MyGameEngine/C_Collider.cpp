@@ -1,11 +1,11 @@
 #include "C_Collider.hpp"
 #include "Object.hpp"
 
-C_Collider::C_Collider(Object* owner)
+C_Collider::C_Collider(Object& owner)
     : Component(owner), layer(CollisionLayer::Default) {
 }
 
-C_Collider::C_Collider(Object* owner, CollisionLayer layer)
+C_Collider::C_Collider(Object& owner, CollisionLayer layer)
     : Component(owner), layer(layer) {
 }
 

@@ -7,7 +7,7 @@ class Object;
 
 class Component {
 public:
-    Component(Object* owner) : owner(owner) {}
+    Component(Object& owner) : owner(owner) {}
 
     virtual void Awake() {};
     virtual void Start() {};
@@ -16,7 +16,7 @@ public:
     virtual void LateUpdate(float deltaTime) {};
 
 public:
-    Object* owner;
+    Object& owner;
 };
 
 #endif /* Component_hpp */

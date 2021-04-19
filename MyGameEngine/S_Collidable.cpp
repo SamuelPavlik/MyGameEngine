@@ -31,7 +31,7 @@ void S_Collidable::Add(std::vector<std::shared_ptr<Object>>& objects) {
 void S_Collidable::ProcessRemovals() {
     for (auto& layer : collidables) {
         auto newEnd = std::remove_if(layer.second.begin(), layer.second.end(), [](auto coll) {
-            return coll->owner->IsQueuedForRemoval();
+            return coll->owner.IsQueuedForRemoval();
         });
         layer.second.erase(newEnd, layer.second.end());
     }
@@ -61,7 +61,7 @@ void S_Collidable::Resolve() {
         for (auto collidableObj : maps.second) {
             // If this collidable is static then no need to check if 
             // it's colliding with other objects.
-            if (collidableObj->owner->transform->IsStatic()) {
+            if (collidableObj->owner.transform->IsStatic()) {
                 continue;
             }
 
@@ -70,8 +70,8 @@ void S_Collidable::Resolve() {
 
             for (auto collisionObj : collisions) {
                 // Make sure we do not resolve collisions between the same object.
-                if (collidableObj->owner->GetInstanceID() 
-                    == collisionObj->owner->GetInstanceID()) {
+                if (collidableObj->owner.GetInstanceID() 
+                    == collisionObj->owner.GetInstanceID()) {
                     continue;
                 }
 
@@ -85,7 +85,7 @@ void S_Collidable::Resolve() {
                         Debug::DrawRect(collisionObj->GetCollidable(), sf::Color::Red);
                         Debug::DrawRect(collidableObj->GetCollidable(), sf::Color::Red);
 
-                        if (collisionObj->owner->transform->IsStatic()) {
+                        if (collisionObj->owner.transform->IsStatic()) {
                             collidableObj->ResolveOverlap(m);
                         }
                         else {

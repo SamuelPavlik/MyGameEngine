@@ -20,9 +20,9 @@ SceneGame::SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocat
 
 void SceneGame::OnCreate() {
     player = std::make_shared<Object>();
-    auto playerSprite = player->AddComponent<C_Sprite>(&textureAllocator);
+    auto playerSprite = player->AddComponent<C_Sprite>(textureAllocator);
     playerSprite->SetDrawLayer(DrawLayer::Entities);
-    player->AddComponent<C_KeyboardMovement>(&input);
+    player->AddComponent<C_KeyboardMovement>(input);
     auto animation = player->AddComponent<C_Animation>();
 
     // idle anim definition

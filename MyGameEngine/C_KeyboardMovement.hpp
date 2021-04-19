@@ -9,19 +9,16 @@ class C_Animation;
 
 class C_KeyboardMovement : public Component {
 public:
-    C_KeyboardMovement(Object* owner, Input* input);
+    C_KeyboardMovement(Object& owner, Input& input);
 
     void Awake() override;
-
-    void SetInput(Input* input);
+    void Update(float deltaTime) override;
 
     void SetMovementSpeed(int moveSpeed);
 
-    void Update(float deltaTime) override;
-
 private:
     int moveSpeed;
-    Input* input;
+    Input& input;
     std::shared_ptr<C_Animation> animation;
 };
 

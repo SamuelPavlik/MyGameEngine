@@ -49,7 +49,7 @@ std::vector<std::shared_ptr<Object>> TileMapParser::Parse
 
             // Allocate sprite if needed
             if (layer.second->isVisible) {
-                auto sprite = tileObject->AddComponent<C_Sprite>(&textureAllocator);
+                auto sprite = tileObject->AddComponent<C_Sprite>(textureAllocator);
                 sprite->Load(tileInfo->textureID);
                 sprite->SetTextureRect(tileInfo->textureRect);
                 sprite->SetScale(tileScale, tileScale);

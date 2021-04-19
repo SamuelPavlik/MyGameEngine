@@ -2,6 +2,7 @@
 #define Input_hpp
 
 #include "Bitmask.hpp"
+
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 
@@ -18,9 +19,9 @@ public:
     Input();
     void Update();
     void AddMapping(std::string keyName, sf::Keyboard::Key keyInput);
-    bool IsKeyPressed(std::string keyName); // Returns true if the key is pressed.
-    bool IsKeyDown(std::string keyName); // Returns true if the key was just pressed.
-    bool IsKeyUp(std::string keyName); // Returns true if the key was just released.
+    bool IsKeyPressed(std::string keyName);
+    bool IsKeyDown(std::string keyName);
+    bool IsKeyUp(std::string keyName);
 
 private:
     Bitmask thisFrameKeys;

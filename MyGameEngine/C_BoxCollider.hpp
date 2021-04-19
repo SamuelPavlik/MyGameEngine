@@ -5,8 +5,8 @@
 
 class C_BoxCollider : public C_Collider {
 public:
-    C_BoxCollider(Object* owner);
-    C_BoxCollider(Object* owner, sf::FloatRect AABB, 
+    C_BoxCollider(Object& owner);
+    C_BoxCollider(Object& owner, sf::FloatRect AABB, 
         CollisionLayer layer = CollisionLayer::Default, 
         sf::Vector2f offset = sf::Vector2f(0.f, 0.f));
 

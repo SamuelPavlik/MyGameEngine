@@ -5,8 +5,8 @@
 
 class C_Transform : public Component {
 public:
-    C_Transform(Object* owner);
-    C_Transform(Object* owner, bool isStaticTransform);
+    C_Transform(Object& owner);
+    C_Transform(Object& owner, bool isStaticTransform);
 
     void SetPosition(float x, float y);
     void SetPosition(const sf::Vector2f& pos);

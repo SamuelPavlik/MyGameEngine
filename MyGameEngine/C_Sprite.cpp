@@ -3,29 +3,27 @@
 #include "C_Transform.hpp"
 #include "ResourceAllocator.hpp"
 
-C_Sprite::C_Sprite(Object* owner, ResourceAllocator<sf::Texture>* allocator) :
+C_Sprite::C_Sprite(Object& owner, ResourceAllocator<sf::Texture>& allocator) :
     Component(owner),
     allocator(allocator),
     currentTextureID(-1) {}
 
-C_Sprite::C_Sprite(Object* owner, ResourceAllocator<sf::Texture>* allocator, const std::string& filePath) : 
+C_Sprite::C_Sprite(Object& owner, ResourceAllocator<sf::Texture>& allocator, const std::string& filePath) : 
     C_Sprite(owner, allocator) {
     Load(filePath);
 }
 
 void C_Sprite::Load(const std::string& filePath) {
-    if (allocator) {
-        int textureID = allocator->Add(filePath);
-        if (textureID >= 0 && textureID != currentTextureID) {
-            std::shared_ptr<sf::Texture> texture = allocator->Get(textureID);
-            sprite.setTexture(*texture);
-        }
+    auto textureID = allocator.Add(filePath);
+    if (textureID >= 0 && textureID != currentTextureID) {
+        auto texture = allocator.Get(textureID);
+        sprite.setTexture(*texture);
     }
 }
 
 void C_Sprite::Load(int id) {
     if (id >= 0 && id != currentTextureID) {
-        std::shared_ptr<sf::Texture> texture = allocator->Get(id);
+        auto texture = allocator.Get(id);
         sprite.setTexture(*texture);
     }
 }
@@ -35,9 +33,10 @@ void C_Sprite::Draw(Window& window) {
 }
 
 void C_Sprite::LateUpdate(float DeltaTime) {
-    sf::Vector2f pos = owner->transform->GetPosition();
-    const sf::IntRect& spriteBounds = sprite.getTextureRect();
-    const sf::Vector2f& spriteScale = sprite.getScale();
+    auto& pos = owner.transform->GetPosition();
+    auto& spriteBounds = sprite.getTextureRect();
+    auto& spriteScale = sprite.getScale();
+
     sprite.setPosition(
         pos.x - ((abs(spriteBounds.width) * 0.5f) * spriteScale.x),
         pos.y - ((abs(spriteBounds.height) * 0.5f) * spriteScale.y)
@@ -57,5 +56,5 @@ void C_Sprite::SetScale(float x, float y) {
 }
 
 bool C_Sprite::IsQueuedForRemoval() const {
-    return owner->IsQueuedForRemoval();
+    return owner.IsQueuedForRemoval();
 }

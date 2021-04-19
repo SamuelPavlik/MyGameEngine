@@ -52,7 +52,7 @@ void Quadtree::Remove(std::shared_ptr<C_BoxCollider> object) {
     //TODO possibly out of bounds exception for children[index]
     if (index == thisTree || children[index] == nullptr) {
         for (auto objIter = objects.begin(); objIter != objects.end(); objIter++) {
-            if ((*objIter)->owner->GetInstanceID() == object->owner->GetInstanceID()) {
+            if ((*objIter)->owner.GetInstanceID() == object->owner.GetInstanceID()) {
                 objects.erase(objIter);
                 break;
             }

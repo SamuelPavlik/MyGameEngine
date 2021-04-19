@@ -20,8 +20,8 @@ struct Manifold {
 
 class C_Collider : public Component {
 public:
-    C_Collider(Object* owner);
-    C_Collider(Object* owner, CollisionLayer layer);
+    C_Collider(Object& owner);
+    C_Collider(Object& owner, CollisionLayer layer);
     ~C_Collider();
 
     virtual Manifold Intersects(const std::shared_ptr<C_Collider>& other) = 0;

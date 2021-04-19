@@ -1,8 +1,6 @@
 #include "Input.hpp"
 
-
 Input::Input() {
-    //empty element for zero position which will be disregarded
     posToKeyboardMapping.push_back(std::vector<sf::Keyboard::Key>());
 }
 

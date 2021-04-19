@@ -9,28 +9,23 @@ class ResourceAllocator;
 
 class C_Sprite : public Component, public C_Drawable {
 public:
-    C_Sprite(Object* owner, ResourceAllocator<sf::Texture>* allocator);
-
-    C_Sprite(Object* owner, ResourceAllocator<sf::Texture>* allocator, const std::string& filePath);
+    C_Sprite(Object& owner, ResourceAllocator<sf::Texture>& allocator);
+    C_Sprite(Object& owner, ResourceAllocator<sf::Texture>& allocator, const std::string& filePath);
 
     void Load(const std::string& filePath);
-
     void Load(int id);
 
     void Draw(Window& window) override;
-
     void LateUpdate(float DeltaTime) override;
 
     void SetTextureRect(int x, int y, int width, int height);
-
     void SetTextureRect(const sf::IntRect& rect);
-
     void SetScale(float x, float y);
 
     virtual bool IsQueuedForRemoval() const override;
 
 private:
-    ResourceAllocator<sf::Texture>* allocator;
+    ResourceAllocator<sf::Texture>& allocator;
     sf::Sprite sprite;
     int currentTextureID;
 
