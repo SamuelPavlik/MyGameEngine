@@ -12,25 +12,28 @@
 
 #include <iostream>
 
-SceneGame::SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocator<sf::Texture>& textureAllocator) :
+SceneGame::SceneGame(const WorkingDirectory& workingDir, Input& input, ResourceAllocator<sf::Texture>& textureAllocator) :
     workingDir(workingDir),
     input{input},
     textureAllocator{textureAllocator},
     mapParser{textureAllocator} {}
 
 void SceneGame::OnCreate() {
-    player = std::make_shared<Object>();
+    auto player = std::make_shared<Object>();
+    
     auto playerSprite = player->AddComponent<C_Sprite>(textureAllocator);
     playerSprite->SetDrawLayer(DrawLayer::Entities);
+
     player->AddComponent<C_KeyboardMovement>(input);
+    
     auto animation = player->AddComponent<C_Animation>();
 
     // idle anim definition
-    int vikingTextureID = textureAllocator.Add(workingDir.Get() + "viking_sheet.png");
-    const int frameWidth = 165;
-    const int frameHeight = 145;
-    std::shared_ptr<Animation> idleAnimation = std::make_shared<Animation>(FacingDirection::Right);
-    const float idleAnimFrameSeconds = 0.2f;
+    auto vikingTextureID = textureAllocator.Add(workingDir.Get() + "viking_sheet.png");
+    auto frameWidth = 165;
+    auto frameHeight = 145;
+    auto idleAnimation = std::make_shared<Animation>(FacingDirection::Right);
+    auto idleAnimFrameSeconds = 0.2f;
 
     idleAnimation->AddFrame(vikingTextureID, 600, 0,
         frameWidth, frameHeight, idleAnimFrameSeconds);
@@ -42,9 +45,8 @@ void SceneGame::OnCreate() {
         frameWidth, frameHeight, idleAnimFrameSeconds);
 
     // walking anim definition
-    std::shared_ptr<Animation> walkAnimation =
-        std::make_shared<Animation>(FacingDirection::Right);
-    const float walkAnimFrameSeconds = 0.15f;
+    auto walkAnimation = std::make_shared<Animation>(FacingDirection::Right);
+    auto walkAnimFrameSeconds = 0.15f;
 
     walkAnimation->AddFrame(vikingTextureID, 600, 290,
         frameWidth, frameHeight, walkAnimFrameSeconds);
@@ -62,7 +64,7 @@ void SceneGame::OnCreate() {
     animation->AddAnimation(AnimationState::Idle, idleAnimation);
 
     sf::Vector2i mapOffset(-0, 400);
-    std::vector<std::shared_ptr<Object>> levelTiles = 
+    auto levelTiles = 
         //mapParser.Parse(workingDir.Get() + "MySecondTiledMap.tmx", mapOffset);
         mapParser.Parse(workingDir.Get() + "Test Map 1 - Copy.tmx", mapOffset);
 

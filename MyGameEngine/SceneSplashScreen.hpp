@@ -1,8 +1,9 @@
 #ifndef SceneSplashScreen_hpp
 #define SceneSplashScreen_hpp
 
-#include <SFML/Graphics.hpp>
 #include "Scene.hpp"
+
+#include <SFML/Graphics.hpp>
 
 class WorkingDirectory;
 class SceneStateMachine;
@@ -12,7 +13,7 @@ class ResourceAllocator;
 
 class SceneSplashScreen : public Scene {
 public:
-    SceneSplashScreen(WorkingDirectory& workingDir,
+    SceneSplashScreen(const WorkingDirectory& workingDir,
         SceneStateMachine& sceneStateMachine, Window& window, 
         ResourceAllocator<sf::Texture>& textureAllocator);
 
@@ -28,7 +29,7 @@ public:
 private:
     sf::Sprite splashSprite;
 
-    WorkingDirectory& workingDir;
+    const WorkingDirectory& workingDir;
     SceneStateMachine& sceneStateMachine;
     Window& window;
     ResourceAllocator<sf::Texture>& textureAllocator;

@@ -11,7 +11,7 @@ class WorkingDirectory {
 public:
     WorkingDirectory();
 
-    inline const std::string& Get() {
+    inline const std::string& Get() const {
         return path;
     }
 private:

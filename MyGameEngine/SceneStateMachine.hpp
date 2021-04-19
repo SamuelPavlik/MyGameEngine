@@ -4,8 +4,9 @@
 #include <memory>
 #include <unordered_map>
 
-#include "Scene.hpp"
 #include "Window.hpp"
+
+class Scene;
 
 class SceneStateMachine {
 public:
@@ -15,7 +16,7 @@ public:
 	void LateUpdate(float deltaTime);
 	void Draw(Window& window);
 
-	unsigned int Add(std::shared_ptr<Scene> scene);
+	unsigned int Add(const std::shared_ptr<Scene>& scene);
 
 	void SwitchTo(unsigned int id);
 

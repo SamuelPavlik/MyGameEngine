@@ -1,4 +1,5 @@
 #include "SceneStateMachine.hpp"
+#include "Scene.hpp"
 
 SceneStateMachine::SceneStateMachine() : scenes(0), curScene(0) {}
 
@@ -20,7 +21,7 @@ void SceneStateMachine::Draw(Window& window) {
     }
 }
 
-unsigned int SceneStateMachine::Add(std::shared_ptr<Scene> scene) {
+unsigned int SceneStateMachine::Add(const std::shared_ptr<Scene>& scene) {
     auto inserted = scenes.insert(std::make_pair(insertedSceneID, scene));
     insertedSceneID++;
     inserted.first->second->OnCreate();

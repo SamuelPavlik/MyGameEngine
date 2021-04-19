@@ -13,7 +13,7 @@ class ResourceAllocator;
 
 class SceneGame : public Scene {
 public:
-    SceneGame(WorkingDirectory& workingDir, Input& input, ResourceAllocator<sf::Texture>& textureAllocator);
+    SceneGame(const WorkingDirectory& workingDir, Input& input, ResourceAllocator<sf::Texture>& textureAllocator);
 
     void OnCreate() override;
     void OnDestroy() override;
@@ -23,9 +23,7 @@ public:
     void LateUpdate(float deltaTime) override;
 
 private:
-    std::shared_ptr<Object> player;
-
-    WorkingDirectory& workingDir;
+    const WorkingDirectory& workingDir;
     Input& input;
     ResourceAllocator<sf::Texture>& textureAllocator;
     ObjectCollection objects;
