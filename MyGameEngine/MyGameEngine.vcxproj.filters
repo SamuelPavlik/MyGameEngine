@@ -78,9 +78,6 @@
     <ClCompile Include="Quadtree.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceAllocator.cpp">
-      <Filter>Source Files\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="S_Collidable.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>

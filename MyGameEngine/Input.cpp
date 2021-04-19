@@ -15,7 +15,7 @@ void Input::Update() {
     }
 }
 
-void Input::AddMapping(std::string keyName, sf::Keyboard::Key keyInput) {
+void Input::AddMapping(const std::string& keyName, sf::Keyboard::Key keyInput) {
     static size_t last_pos = 1;
     if (keyToPosMapping.find(keyName) == keyToPosMapping.end()) {
         keyToPosMapping[keyName] = last_pos++;
@@ -26,25 +26,30 @@ void Input::AddMapping(std::string keyName, sf::Keyboard::Key keyInput) {
     }
 }
 
-// Return true if the specified key is currently being pressed.
-bool Input::IsKeyPressed(std::string keyName) {
-    return thisFrameKeys.GetBit(keyToPosMapping[keyName]);
+bool Input::IsKeyPressed(const std::string& keyName) const {
+    auto it = keyToPosMapping.find(keyName);
+    if (it != keyToPosMapping.end()) {
+        return thisFrameKeys.GetBit(it->second);
+    }
+    return false;
 }
 
-// Returns true if the key was just pressed 
-// (i.e. registered as pressed this frame but not the previous).
-bool Input::IsKeyDown(std::string keyName) {
-    bool lastFrame = lastFrameKeys.GetBit(keyToPosMapping[keyName]);
-    bool thisFrame = thisFrameKeys.GetBit(keyToPosMapping[keyName]);
-
-    return thisFrame && !lastFrame;
+bool Input::IsKeyDown(const std::string& keyName) const {
+    auto it = keyToPosMapping.find(keyName);
+    if (it != keyToPosMapping.end()) {
+        bool lastFrame = lastFrameKeys.GetBit(it->second);
+        bool thisFrame = thisFrameKeys.GetBit(it->second);
+        return thisFrame && !lastFrame;
+    }
+    return false;
 }
 
-// Returns true if the key was just released (i.e. registered as 
-// pressed last frame but not the current frame).
-bool Input::IsKeyUp(std::string keyName) {
-    bool lastFrame = lastFrameKeys.GetBit(keyToPosMapping[keyName]);
-    bool thisFrame = thisFrameKeys.GetBit(keyToPosMapping[keyName]);
-
-    return !thisFrame && lastFrame;
+bool Input::IsKeyUp(const std::string& keyName) const {
+    auto it = keyToPosMapping.find(keyName);
+    if (it != keyToPosMapping.end()) {
+        bool lastFrame = lastFrameKeys.GetBit(it->second);
+        bool thisFrame = thisFrameKeys.GetBit(it->second);
+        return !thisFrame && lastFrame;
+    }
+    return false;
 }

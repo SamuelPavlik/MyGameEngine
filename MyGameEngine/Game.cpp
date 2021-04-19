@@ -2,8 +2,6 @@
 #include "SceneSplashScreen.hpp"
 #include "SceneGame.hpp"
 
-#include <iostream>
-
 Game::Game() : window("Game Window") {
     //Input mappings
     input.AddMapping("Left", sf::Keyboard::Left);
@@ -17,11 +15,10 @@ Game::Game() : window("Game Window") {
     input.AddMapping("Esc", sf::Keyboard::Escape);
 
     //Initialize scenes
-    std::shared_ptr<SceneSplashScreen> splashScreen =
-        std::make_shared<SceneSplashScreen>(workingDir, sceneStateMachine, window, textureAllocator);
-
-    unsigned int splashScreenID = sceneStateMachine.Add(splashScreen);
-    unsigned int gameSceneID = sceneStateMachine.Add(
+    auto splashScreen = std::make_shared<SceneSplashScreen>
+        (workingDir, sceneStateMachine, window, textureAllocator);
+    auto splashScreenID = sceneStateMachine.Add(splashScreen);
+    auto gameSceneID = sceneStateMachine.Add(
         std::make_shared<SceneGame>(workingDir, input, textureAllocator));
 
     splashScreen->SetSwitchToScene(gameSceneID);

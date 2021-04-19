@@ -19,21 +19,21 @@ void ObjectCollection::Draw(Window& window) {
     drawables.Draw(window);
 }
 
-void ObjectCollection::Add(std::shared_ptr<Object> object) {
+void ObjectCollection::Add(std::shared_ptr<Object>& object) {
     newObjects.push_back(object);
 }
 
-void ObjectCollection::Add(std::vector<std::shared_ptr<Object>> objects) {
+void ObjectCollection::Add(std::vector<std::shared_ptr<Object>>& objects) {
     newObjects.insert(newObjects.end(), objects.begin(), objects.end());
 }
 
 void ObjectCollection::ProcessNewObjects() {
     if (newObjects.size() > 0) {
-        for (const auto& o : newObjects) {
+        for (auto& o : newObjects) {
             o->Awake();
         }
 
-        for (const auto& o : newObjects) {
+        for (auto& o : newObjects) {
             o->Start();
         }
 

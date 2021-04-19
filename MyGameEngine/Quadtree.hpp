@@ -2,7 +2,6 @@
 #define Quadtree_hpp
 
 #include <SFML/Graphics.hpp>
-
 #include <memory>
 #include <vector>
 #include <array>
@@ -15,35 +14,22 @@ public:
     Quadtree(int maxObjects, int maxLevels, int level,
         sf::FloatRect bounds, Quadtree* parent);
 
-    // Inserts object into our quadtree.
-    void Insert(std::shared_ptr<C_BoxCollider> object);
-
-    // Removes object from our quadtree when we no longer need it to collide.
-    void Remove(std::shared_ptr<C_BoxCollider> object);
-
-    // Removes all objects from tree.
+    void Insert(std::shared_ptr<C_BoxCollider>& object);
+    void Remove(std::shared_ptr<C_BoxCollider>& object);
     void Clear();
-
-    // Returns vector of colliders that intersect with the search area.
     std::vector<std::shared_ptr<C_BoxCollider>>
         Search(const sf::FloatRect& area);
 
-    // Returns the bounds of this node.
     const sf::FloatRect& GetBounds() const;
-
     const bool ContainsNull() const;
 
-    void DrawDebug();
+    void DrawDebug() const;
 
 private:
     void SearchInArea(const sf::FloatRect& area, 
-        std::vector<std::shared_ptr<C_BoxCollider>>& overlappingObjects);
+        std::vector<std::shared_ptr<C_BoxCollider>>& overlappingObjects) const;
+    int GetChildIndexForObject(const sf::FloatRect& objectBounds) const;
 
-    // Returns the index for the node that will contain 		
-    // the object. -1 is returned if it is this node.
-    int GetChildIndexForObject(const sf::FloatRect& objectBounds);
-
-    // Creates the child nodes.
     void Split();
 
     static const int thisTree = -1;

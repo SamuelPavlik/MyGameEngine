@@ -11,10 +11,11 @@ class ResourceAllocator {
 
 public:
     template<typename... Args>
-    int Add(const std::string& filePath, Args... args) {
+    int Add(const std::string& filePath, const Args&&... args) {
         auto it = std::find_if(resources.cbegin(), resources.cend(), 
             [filePath](std::pair<int, std::pair<std::string, std::shared_ptr<T>>> elem) { 
-                return elem.second.first == filePath; });
+                return elem.second.first == filePath;
+            });
 
         if (it != resources.end()) {
             return it->first;

@@ -16,12 +16,15 @@ public:
         Down = 4,
         Esc = 5
     };
+
     Input();
+    
     void Update();
-    void AddMapping(std::string keyName, sf::Keyboard::Key keyInput);
-    bool IsKeyPressed(std::string keyName);
-    bool IsKeyDown(std::string keyName);
-    bool IsKeyUp(std::string keyName);
+    void AddMapping(const std::string& keyName, sf::Keyboard::Key keyInput);
+
+    bool IsKeyPressed(const std::string& keyName) const;
+    bool IsKeyDown(const std::string& keyName) const;
+    bool IsKeyUp(const std::string& keyName) const;
 
 private:
     Bitmask thisFrameKeys;
