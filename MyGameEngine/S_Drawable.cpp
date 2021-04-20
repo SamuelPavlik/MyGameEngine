@@ -2,7 +2,6 @@
 #include "Object.hpp"
 
 #include <algorithm>
-#include <functional>
 
 S_Drawable::S_Drawable() {
     drawablesMap = DrawablesMap();
@@ -38,7 +37,7 @@ void S_Drawable::Add(std::shared_ptr<Object>& object) {
     }
 }
 
-auto compareFunc = [](const std::shared_ptr<C_Drawable>& a, const std::shared_ptr<C_Drawable>& b) {
+const auto compareFunc = [](const std::shared_ptr<C_Drawable>& a, const std::shared_ptr<C_Drawable>& b) {
     return a->GetSortOrder() < b->GetSortOrder();
 };
 

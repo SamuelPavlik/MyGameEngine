@@ -11,7 +11,7 @@ void Debug::Draw(Window& window) {
     rects.clear();
 
     for (const auto& l : lines) {
-        sf::Vertex line[2] = { l.at(0), l.at(1) };
+        std::vector<sf::Vertex> line = { l.at(0), l.at(1) };
         window.Draw(line, 2, sf::Lines);
     }
     lines.clear();

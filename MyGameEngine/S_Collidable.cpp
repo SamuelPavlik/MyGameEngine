@@ -20,9 +20,8 @@ S_Collidable::S_Collidable() {
 }
 
 void S_Collidable::Add(std::vector<std::shared_ptr<Object>>& objects) {
-    for (auto obj : objects) {
-        auto collider = obj->GetComponent<C_BoxCollider>();
-        if (collider) {
+    for (const auto& obj : objects) {
+        if (auto collider = obj->GetComponent<C_BoxCollider>()) {
             collidables[collider->GetLayer()].push_back(collider);
         }
     }
@@ -51,24 +50,23 @@ void S_Collidable::Update() {
 }
 
 void S_Collidable::Resolve() {
-    for (auto maps : collidables) {
+    for (auto& maps : collidables) {
         // If this layer collides with nothing then no need to 
         // perform any further checks.
         if (collisionLayers[maps.first].GetMask() == 0) {
             continue;
         }
 
-        for (auto collidableObj : maps.second) {
+        for (auto& collidableObj : maps.second) {
             // If this collidable is static then no need to check if 
             // it's colliding with other objects.
             if (collidableObj->owner.transform->IsStatic()) {
                 continue;
             }
 
-            std::vector<std::shared_ptr<C_BoxCollider>> collisions =
-                collisionTree.Search(collidableObj->GetCollidable());
+            auto collisions = collisionTree.Search(collidableObj->GetCollidable());
 
-            for (auto collisionObj : collisions) {
+            for (auto& collisionObj : collisions) {
                 // Make sure we do not resolve collisions between the same object.
                 if (collidableObj->owner.GetInstanceID() 
                     == collisionObj->owner.GetInstanceID()) {

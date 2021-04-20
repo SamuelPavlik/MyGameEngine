@@ -37,6 +37,6 @@ sf::Vector2u Window::GetCentre() const {
     return window.getSize() / 2u;
 }
 
-void Window::Draw(const sf::Vertex* vertices, std::size_t vertexCount, sf::PrimitiveType type) {
-    window.draw(vertices, vertexCount, type);
+void Window::Draw(const std::vector<sf::Vertex>& vertices, std::size_t vertexCount, sf::PrimitiveType type) {
+    window.draw(vertices.data(), vertexCount, type);
 }
